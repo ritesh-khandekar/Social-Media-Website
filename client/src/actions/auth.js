@@ -1,10 +1,11 @@
 import * as api from '../api'
 import { setCurrentUser } from './currentUser'
 
-export const signup = (authData, navigate) => async (dispatch) => {
+export const signup = (authData, navigate, setisLoading) => async (dispatch) => {
     try {
         const { data } = await api.signUp(authData)
         dispatch({ type: 'AUTH', data})
+        setisLoading(false)
         dispatch(setCurrentUser( JSON.parse(localStorage.getItem('Profile')) ))
         navigate('/')
     } catch (error) {
@@ -12,10 +13,11 @@ export const signup = (authData, navigate) => async (dispatch) => {
     }
 }
 
-export const login = (authData, navigate) => async (dispatch) => {
+export const login = (authData, navigate, setisLoading) => async (dispatch) => {
     try {
         const { data } = await api.logIn(authData)
         dispatch({ type: 'AUTH', data})
+        setisLoading(false)
         dispatch(setCurrentUser( JSON.parse(localStorage.getItem('Profile')) ))
         navigate('/')
     } catch (error) {

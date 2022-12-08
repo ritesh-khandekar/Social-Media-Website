@@ -1,0 +1,43 @@
+.profile-bio-update-form{
+    border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 20px;
+    max-width: 350px;
+    margin: 20px auto;
+}
+.profile-img-selector input, .text-bio {
+    display: block;
+    border-radius: 7px;
+    border: 1px solid black;
+    padding: 10px 15px;
+    font-size: medium;
+    width: calc(100% - 40px);
+    outline: none;
+    margin: 10px auto;
+}
+.preview-img{
+    width: 50%;
+    display: block;
+    margin: 20px auto;
+    border-radius: 5px;
+}
+.cropper-layout{
+    margin: 0 auto;
+}
+.text-muted {
+    font-weight: bold;
+    font-size: small;
+}
+.update-profile-bio-btn{
+    padding: 10px 20px;
+    background: #1877f2;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+.center{
+    text-align: center;
+}

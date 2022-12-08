@@ -4,26 +4,33 @@ import { signup } from '../../actions/auth'
 import { BrandName } from '../../components/Brand'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import Loader from '../../components/Loader'
 import './auth.css'
 
 const SignUp = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const [isLoading, setIsLoading] = useState(false)
   const [fname, setfname] = useState("")
   const [lname, setlname] = useState("")
   const [phone, setphone] = useState("")
   const [birthdate, setbirthdate] = useState("")
   const [gender, setgender] = useState("")
   const [email, setEmail] = useState("")
-  const [passsword, setPasssword] = useState("")
+  const [password, setpassword] = useState("")
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!email || !passsword || !fname || !lname || !gender || !phone || !birthdate) return alert("Please enter all the details")
-    dispatch(signup({ email, passsword, fname, lname, gender, phone, birthdate }, navigate))
+    if (!email || !password || !fname || !lname || !gender || !phone || !birthdate) return alert("Please enter all the details")
+    setIsLoading(true)
+    dispatch(signup({ email, password, fname, lname, gender, phone, birthdate }, navigate, setIsLoading))
   }
   return <>
+    {
+      isLoading ?
+        <Loader /> : <></>
+    }
     <div className="row">
       <div className="col">
         <div className="header">
@@ -46,7 +53,7 @@ const SignUp = () => {
               </div>
               <input type="tel" name="phone" value={phone} onChange={(e) => setphone(e.target.value)} placeholder='Mobile number' id="phone" />
               <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email address' id="email" />
-              <input type="password" name="password" value={passsword} onChange={(e) => setPasssword(e.target.value)} placeholder='New password' id="password" />
+              <input type="password" name="password" value={password} onChange={(e) => setpassword(e.target.value)} placeholder='New password' id="password" />
 
               <p className='text-muted'>Date of birth</p>
               <input type="date" value={birthdate} onChange={(e) => setbirthdate(e.target.value)} min={"1950-01-01"} max={"2015-01-01"} name="" id="" />

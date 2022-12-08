@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
+import mongoose from 'mongoose'
 
 import users from '../models/users.js'
 
@@ -32,6 +33,7 @@ export const updateProfile = async (req, res) => {
     }
     try {
         const updatedProfile = await users.findByIdAndUpdate(_id, { $set: details }, { new: true })
+        delete updatedProfile["password"];
         res.status(200).json(updatedProfile)
     } catch (error) {
         res.status(405).json({ message: error.message })

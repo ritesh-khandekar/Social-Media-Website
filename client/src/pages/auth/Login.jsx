@@ -4,20 +4,28 @@ import { login } from '../../actions/auth'
 import { BrandName } from '../../components/Brand'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import Loader from '../../components/Loader'
 import './auth.css'
 
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const [isLoading, setIsLoading] = useState(false)
   const [email, setEmail] = useState("")
-  const [passsword, setPasssword] = useState("")
+  const [password, setpassword] = useState("")
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if(!email || !passsword) return alert("Please enter email and password")
-    dispatch(login({ email, passsword }, navigate))
+    if (!email || !password) return alert("Please enter email and password")
+    setIsLoading(true)
+    dispatch(login({ email, password }, navigate, setIsLoading))
   }
   return <>
+    {
+      isLoading ?
+        <Loader /> : <></>
+    }
     <div className="row">
       <div className="col">
         <div className="header">
@@ -31,8 +39,8 @@ const Login = () => {
         <div>
           <div className="login-form">
             <form action="" onSubmit={handleSubmit}>
-              <input type="email" placeholder='Email address or phone number' onChange={(e) => setEmail(e.target.value)} name="email" id="email" />
-              <input type="password" placeholder='Password' onChange={(e) => setPasssword(e.target.value)} name="password" id="password" />
+              <input type="email" placeholder='Email address or phone number' value={email} onChange={(e) => setEmail(e.target.value)} name="email" id="email" />
+              <input type="password" placeholder='Password' value={password} onChange={(e) => setpassword(e.target.value)} name="password" id="password" />
               <input type="submit" value="Log In" />
               <div className="forget-password">
                 Forgotten Password?
