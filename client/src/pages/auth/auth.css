@@ -1,0 +1,154 @@
+.row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 100vh;
+}
+
+.col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+}
+
+.header-brand {
+    font-size: 5vw;
+    margin: 0;
+    color: #1877f2;
+}
+
+.login-form {
+    border-radius: 7px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 20px;
+    text-align: center;
+    margin: 20px;
+    width: calc(90% -20px);
+}
+
+.login-form input {
+    display: block;
+    border-radius: 7px;
+    border: 1px solid black;
+    padding: 15px 20px;
+    font-size: medium;
+    width: calc(100% - 40px);
+    outline: none;
+    margin: 10px auto;
+}
+
+.login-form input:first-child {
+    margin-top: 0;
+}
+
+.login-form input[type='submit'] {
+    background-color: #1877f2;
+    color: white;
+    font-size: medium;
+    font-weight: bold;
+    width: 100%;
+    border: none;
+}
+
+.forget-password {
+    color: #1877f2;
+}
+
+.signup-btn {
+    background-color: #42b72a;
+    padding: 10px 20px;
+    border: none !important;
+    border-radius: 7px;
+    color: white;
+    font-weight: bold;
+}
+
+hr {
+    margin: 20px 0;
+}
+
+.page-info {
+    text-align: center;
+    margin: 20px;
+}
+
+/* SIGNUP */
+.signup-form {
+    padding: 20px;
+    border-radius: 7px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    width: 60vh;
+    margin: 10px;
+}
+
+.signup-form p {
+    margin: 0;
+}
+
+.signup-header {
+    margin: 0;
+}
+
+.signup-form input:not(input[type='radio']) {
+    border-radius: 4px;
+    padding: 10px;
+    margin: 5px;
+    font-size: medium;
+    border: 1px solid black;
+    width: calc(100% - 40px);
+}
+
+.signup-form .input-row {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.text-muted {
+    font-weight: bold;
+    font-size: small;
+}
+.text-muted-small {
+    font-size: x-small;
+    color: #959595;
+}
+
+.gender-selector label {
+    margin-right: 50px;
+}
+
+.gender-selector {
+    text-align: center;
+    padding-bottom: 5px;
+}
+.center{
+    text-align: center;
+    padding-top: 10px;
+}
+
+@media (max-width: 700px) {
+    .row {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .header {
+        padding: 40px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .header-brand {
+        font-size: 3em;
+    }
+
+    /* SIGNUP */
+    .signup-form {
+        width: calc(100vw - 80px);
+    }
+}
