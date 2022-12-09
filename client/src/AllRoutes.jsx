@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom'
 import Logout from './components/Logout'
 import Login from './pages/auth/Login'
 import SignUp from './pages/auth/SignUp'
+import FriendSuggestions from './pages/friends/FriendSuggestions'
+import UserFriend from './pages/friends/UserFriend'
 import Home from './pages/Home'
 import EditProfileDetails from './pages/user/EditProfileDetails'
 import Profile from './pages/user/Profile'
@@ -18,6 +20,7 @@ const AllRoutes = () => {
             <Route path='/bioupdate' element={<ProfileBioForm />} />
             <Route path='/profileedit' element={<EditProfileDetails />} />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/test' element={<FriendSuggestions />} />
         </Routes>
     )
 }

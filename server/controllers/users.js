@@ -26,7 +26,6 @@ export const updateProfile = async (req, res) => {
         return res.status(404).send('User unavailable...');
     }
     let details = {}
-    console.log(req.body)
     for (const param in req.body) {
         if (param && req.body[param] && !req.body[param].match(/^\s*$/)) {
             details[param] = req.body[param]
@@ -34,7 +33,6 @@ export const updateProfile = async (req, res) => {
     }
     try {
         const updatedProfile = await users.findByIdAndUpdate(_id, { $set: details }, { new: true })
-        // delete updateProfile['password']
         res.status(200).json(updatedProfile)
     } catch (error) {
         res.status(405).json({ message: error.message })

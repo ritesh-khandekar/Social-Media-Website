@@ -8,7 +8,7 @@ import defaultPic from '../../assets/profile/user.png'
 import './profileform.css'
 import { updateProfile } from '../../actions/user'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClose, faInfo, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { faClose, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { useEffect } from 'react'
 
 const ProfileBioForm = ({ setVisibleComponent, oldBio }) => {

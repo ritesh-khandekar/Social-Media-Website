@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/user', userRoutes)
-app.use('/friend', friendRoutes)
+app.use('/friends', friendRoutes)
 app.use('/posts', postsRoutes)
 
 const PORT = process.env.PORT

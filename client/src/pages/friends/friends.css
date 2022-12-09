@@ -1,0 +1,78 @@
+.friends-container {
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 7px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.no-friends {
+    text-align: center;
+    padding: 20px;
+    color: rgb(81, 81, 81);
+    font-weight: bold;
+    font-size: large;
+}
+
+.friend-container {
+    border-bottom: 1px solid rgb(178, 178, 178);
+    display: flex;
+}
+
+.friend-profile-pic {
+    display: block;
+    margin: 15px;
+}
+
+.friend-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.friend-info h3 {
+    text-align: center;
+    margin: 0;
+}
+
+.btn-group {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.btn-group button {
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.add-friend-btn {
+    background: #1877f2;
+    color: white;
+}
+
+.unfriend-btn {
+    background: white;
+    border: 1px solid red !important;
+    color: red;
+}
+.friends-btn{
+    background: white;
+    color: #00e600;
+    font-weight: bolder;
+}
+
+@media (max-width: 400px) {
+    .friend-profile-pic {
+        margin: 5px;
+    }
+
+    .friend-container {
+        padding: 10px 10px;
+    }
+}

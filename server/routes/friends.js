@@ -1,10 +1,11 @@
 import express from 'express';
-import { addFriend, removeFriend, getAllFriends } from '../controllers/friends.js'
-
+import { addFriend, removeFriend, getAllFriends, getSuggestions } from '../controllers/friends.js'
+import auth from '../middleware/auth.js'
 const router = express.Router();
 
 router.get('/:id', getAllFriends)
-router.post('/add/:friend1/:friend2', addFriend)
-router.delete('/remove/:friend', removeFriend)
+router.get('/', auth, getSuggestions)
+router.post('/add/:friend', auth, addFriend)
+router.delete('/remove/:friend', auth, removeFriend)
 
 export default router

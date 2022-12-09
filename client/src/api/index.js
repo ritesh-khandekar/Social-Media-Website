@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-const API = axios.create({ baseURL: 'http://192.168.43.22:5000'})
+const API = axios.create({ baseURL: 'http://192.168.43.22:5000' })
 
 API.interceptors.request.use((req) => {
-    if(localStorage.getItem('Profile')){
+    if (localStorage.getItem('Profile')) {
         req.headers.authorization = `Bearer ${JSON.parse(localStorage.getItem('Profile')).token}`
     }
     return req;
@@ -14,6 +14,11 @@ export const signUp = (authData) => API.post('/user/signup', authData);
 
 export const getProfile = (id) => API.get(`/user/profile/${id}`);
 export const updateProfile = (profileData, id) => API.patch(`/user/profile/update/${id}`, profileData);
+
+export const getFriendSuggestions = () => API.get('/friends/')
+export const getAllFriends = (friendId) => API.get(`/friends/${friendId}`)
+export const addFriend = (friendId) => API.post(`/friends/add/${friendId}`)
+export const deleteFriend = (friendId) => API.delete(`/friends/remove/${friendId}`)
 
 // export const postQuestion = (questionData) => API.post('/questions/Ask', questionData)
 // export const getAllQuestions = () => API.get('/questions/get');

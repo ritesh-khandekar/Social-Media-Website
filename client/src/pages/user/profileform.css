@@ -1,4 +1,4 @@
-.profile-bio-update-form{
+.profile-bio-update-form {
     border-radius: 10px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     padding: 20px;
@@ -6,12 +6,14 @@
     margin: 10px auto;
     background: white;
 }
-.close-btn{
+
+.close-btn {
     float: right;
     padding: 10px;
     cursor: pointer;
 }
-.form-parent{
+
+.form-parent {
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -20,9 +22,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0,0,0, 0.7);
+    background: rgba(0, 0, 0, 0.7);
 }
-.profile-img-selector input, .text-bio {
+
+.profile-img-selector input,
+.text-bio {
     display: block;
     border-radius: 7px;
     border: 1px solid black;
@@ -32,20 +36,24 @@
     outline: none;
     margin: 10px auto;
 }
-.preview-img{
+
+.preview-img {
     width: 50%;
     display: block;
     border-radius: 50%;
     margin: 20px auto;
 }
-.cropper-layout{
+
+.cropper-layout {
     margin: 0 auto;
 }
+
 .text-muted {
     font-weight: bold;
     font-size: small;
 }
-.update-profile-bio-btn{
+
+.update-profile-bio-btn {
     padding: 10px 20px;
     background: #1877f2;
     color: white;
@@ -54,7 +62,9 @@
     cursor: pointer;
     outline: none;
     border: none;
+    width: 80% !important;
 }
-.center{
+
+.center {
     text-align: center;
 }
