@@ -1,0 +1,81 @@
+.edit-profile-form {
+    border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 20px;
+    max-width: 350px;
+    margin: 10px auto;
+    background: white;
+}
+
+.edit-profile-form p {
+    margin: 0;
+}
+
+.edit-profile-header {
+    margin: 0;
+}
+
+.edit-profile-form input:not(input[type='radio']) {
+    border-radius: 4px;
+    padding: 10px;
+    margin: 7px 5px;
+    font-size: medium;
+    border: 1px solid black;
+    width: calc(100% - 40px);
+}
+
+.edit-profile-form .input-row {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.edit-profile-header {
+    font-size: x-large;
+    text-align: center;
+}
+
+.form-parent {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.text-muted {
+    font-weight: bold;
+    font-size: small;
+}
+
+.text-muted-small {
+    font-size: x-small;
+    color: #959595;
+}
+
+.gender-selector label {
+    margin-right: 50px;
+}
+
+.gender-selector {
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+.center {
+    text-align: center;
+    padding-top: 10px;
+}
+.edit-profile-btn{
+    padding: 10px 20px;
+    background: #1877f2;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}

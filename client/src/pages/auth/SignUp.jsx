@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { signup } from '../../actions/auth'
 import { BrandName } from '../../components/Brand'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import Loader from '../../components/Loader'
 import './auth.css'
@@ -77,6 +77,9 @@ const SignUp = () => {
                 <input type="submit" value={"Sign Up"} className="signup-btn" />
               </div>
             </form>
+          </div>
+          <div className="forget-password" style={{ textAlign: "center" }}>
+            Already have account? <Link to={"/login"} className='login-btn-link'>Login</Link>
           </div>
         </div>
       </div>

@@ -10,6 +10,7 @@ const auth = (req, res, next) => {
         return next()
     } catch (error) {
         console.log(error)
+        return res.status(400).send({ message: 'Token verification failed'})
     }
 }
 

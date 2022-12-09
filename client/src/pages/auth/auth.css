@@ -59,14 +59,20 @@
 .forget-password {
     color: #1877f2;
 }
-
+.login-btn-link{
+    font-weight: bold;
+    color: #1877f2;
+    text-decoration: none;
+}
 .signup-btn {
     background-color: #42b72a;
     padding: 10px 20px;
     border: none !important;
     border-radius: 7px;
     color: white;
+    text-decoration: none;
     font-weight: bold;
+    display: inline-block;
 }
 
 hr {
@@ -130,7 +136,10 @@ hr {
     text-align: center;
     padding-top: 10px;
 }
-
+.error{
+    color: red;
+    font-weight: bold;
+}
 @media (max-width: 700px) {
     .row {
         flex-direction: column;

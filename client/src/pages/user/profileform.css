@@ -1,0 +1,60 @@
+.profile-bio-update-form{
+    border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 20px;
+    max-width: 350px;
+    margin: 10px auto;
+    background: white;
+}
+.close-btn{
+    float: right;
+    padding: 10px;
+    cursor: pointer;
+}
+.form-parent{
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0, 0.7);
+}
+.profile-img-selector input, .text-bio {
+    display: block;
+    border-radius: 7px;
+    border: 1px solid black;
+    padding: 10px 15px;
+    font-size: medium;
+    width: calc(100% - 40px);
+    outline: none;
+    margin: 10px auto;
+}
+.preview-img{
+    width: 50%;
+    display: block;
+    border-radius: 50%;
+    margin: 20px auto;
+}
+.cropper-layout{
+    margin: 0 auto;
+}
+.text-muted {
+    font-weight: bold;
+    font-size: small;
+}
+.update-profile-bio-btn{
+    padding: 10px 20px;
+    background: #1877f2;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+.center{
+    text-align: center;
+}

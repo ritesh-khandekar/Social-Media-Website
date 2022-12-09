@@ -10,14 +10,14 @@ const ImageCrop = ({ image, setCropData, setVisibleCropper }) => {
     const [cropper, setCropper] = useState();
 
     const cropImage = (e) => {
-        if (typeof cropper !== undefined) {
+        if (typeof cropper !== "undefined") {
             setCropData(cropper.getCroppedCanvas().toDataURL())
             setVisibleCropper(false)
         }
     }
 
     return <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ left: 0, zIndex: 10, width:"100%" }} className="preview-container">
-        <img className="img-preview" />
+        {/* <img className="img-preview" alt='Cropper layout' /> */}
         <Cropper
             initialAspectRatio={1}
             preview=".img-preview"

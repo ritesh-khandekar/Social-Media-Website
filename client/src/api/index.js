@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API = axios.create({ baseURL: 'http://localhost:5000'})
+const API = axios.create({ baseURL: 'http://192.168.43.22:5000'})
 
 API.interceptors.request.use((req) => {
     if(localStorage.getItem('Profile')){
@@ -12,6 +12,7 @@ API.interceptors.request.use((req) => {
 export const logIn = (authData) => API.post('/user/login', authData);
 export const signUp = (authData) => API.post('/user/signup', authData);
 
+export const getProfile = (id) => API.get(`/user/profile/${id}`);
 export const updateProfile = (profileData, id) => API.patch(`/user/profile/update/${id}`, profileData);
 
 // export const postQuestion = (questionData) => API.post('/questions/Ask', questionData)
