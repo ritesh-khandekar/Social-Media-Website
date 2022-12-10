@@ -13,26 +13,23 @@ export const addFriend = async (req, res) => {
         return res.status(404).send('User unavailable...');
     }
 
-    const friendExist = await friends.find({
-        $and: [
-            { 'friend1': user },
-            { 'friend2': friend }
-        ]
-    })
-    if (friendExist.length > 0) {
-        return res.status(200).send({
-            result: friendExist[0]
-        });
+    const thisUser = await users.findById(user)
+    const friendUser = await users.findById(user)
+    if (thisUser.sentFriendRequests.includes(friend)) {
+        return res.status(404).send('Friend request sent already...');
     }
+
+    thisUser.sentFriendRequests.push(friend)
+    friendUser.receivedFriendRequests.push(friend)
     try {
-        const newFriends = await friends.create({ friend1: user, friend2: friend })
-        const fetchedUser = await users.findById(user)
-        console.log(fetchedUser)
-        const friendRequests = fetchedUser.sentFriendRequests.push(friend)
+        const friendRequests = thisUser.sentFriendRequests;
         const updatedUser = await users.findByIdAndUpdate(user, {
             sentFriendRequests: friendRequests
         }, { new: true })
-        res.status(200).json({ result: newFriends, updatedUser })
+        const updatedFriend = await users.findByIdAndUpdate(friend, {
+            receivedFriendRequests: friendUser.receivedFriendRequests
+        }, { new: true })
+        res.status(200).json({ updatedUser })
     } catch (error) {
         res.status(500).json("Something went wrong..." + error)
     }
@@ -45,12 +42,20 @@ export const removeFriend = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(friend)) {
         return res.status(404).send('User unavailable...');
     }
+    const thisUser = await users.findById(req.userId)
+    const friendUser = await users.findById(req.userId)
+    if (!thisUser.friends.includes(friend)) {
+        return res.status(404).send('No Friend ...');
+    }
+
+    const thisUpdatedFriends = thisUser.friends.filter(f => f !== friend)
+    const friendUpdatedFriends = friendUser.friends.filter(f => f !== req.userId)
     try {
-        await friends.deleteOne({
-            $or: [
-                { 'friend1': friend },
-                { 'friend2': friend }
-            ]
+        await users.findByIdAndUpdate(req.userId, {
+            friends: thisUpdatedFriends
+        })
+        await users.findByIdAndUpdate(friend, {
+            friends: friendUpdatedFriends
         })
         res.status(200).json({ deleted: true })
 
@@ -67,34 +72,37 @@ export const acceptFriend = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(friend)) {
         return res.status(404).send('User unavailable...');
     }
-    const friendExist = await friends.find({
-        $and: [
-            { 'friend1': user },
-            { 'friend2': friend }
-        ]
-    })
-    if (friendExist.length > 0) {
-        try {
-            await friends.updateOne({
-                $and: [
-                    { 'friend1': user },
-                    { 'friend2': friend }
-                ]
-            }, {
-                accepted: true
-            })
-            res.status(200).json({ deleted: true })
+    const thisUser = await users.findById(user)
+    const friendUser = await users.findById(friend)
+    if (!thisUser.receivedFriendRequests.includes(friend)) {
+        return res.status(404).send('No request...');
+    }
 
-        } catch (error) {
-            res.status(500).json("Something went worng...")
-        }
-    } else {
-        res.status(500).json("No friend request found...")
+    const updatedSentRequests = friendUser.sentFriendRequests.filter(f => f !== user)
+    const updatedFriendRequests = thisUser.receivedFriendRequests.filter(f => f !== friend)
+    thisUser.friends.push(friend)
+    friendUser.friends.push(friend)
+    try {
+        await users.findByIdAndUpdate(req.userId, {
+            receivedFriendRequests: updatedFriendRequests,
+            friends: thisUser.friends
+        })
+        await users.findByIdAndUpdate(friend, {
+            sentFriendRequests: updatedSentRequests,
+            friends: friendUser.friends
+        })
+        res.status(200).json({ thisUser })
+
+    } catch (error) {
+        res.status(500).json("Something went worng...")
     }
 }
 export const getSuggestions2 = async (req, res) => {
     try {
-        let friends = await users.find({})
+        let friends = await users.find({
+            friends: { $ne: req.userId },
+            receivedFriendRequests: { $ne: req.userId }
+        })
         friends = friends.filter(friend => friend._id != req.userId)
         return res.status(200).send({ friends })
     } catch (error) {
@@ -137,77 +145,26 @@ export const getSuggestions = async (req, res) => {
 export const getAllFriends = async (req, res) => {
     const { id: currentUser } = req.params;
     try {
-        const allFriends = await users.aggregate([
-            {
-                $match: {
-                    '_id': mongoose.Types.ObjectId(currentUser)
-                }
-            },
-            {
-                $lookup: {
-                    from: 'fb_friends',
-                    localField: '_id',
-                    foreignField: 'friend1',
-                    as: 'friendInfo',
-                    pipeline: [{
-                        $match: {
-                            'accepted': true
-                        }
-                    }]
-                },
-                $lookup: {
-                    from: 'fb_friends',
-                    localField: '_id',
-                    foreignField: 'friend2',
-                    as: 'friendInfo',
-                    pipeline: [{
-                        $match: {
-                            'accepted': true
-                        }
-                    }]
-                }
-            }
-        ]);
-        const allFriendsDetails = []
-        allFriends.forEach(user => {
-            allFriendsDetails.push({
-                _id: user._id,
-                fname: user.fname,
-                lname: user.lname,
-                posts: user.posts,
-                time: user.time,
-                bio: user.bio,
-                profile: user.profile,
-            })
+        let friends = await users.find({
+            friends: currentUser,
         })
-        res.status(200).json(allFriendsDetails);
+        friends = friends.filter(friend => friend._id != req.userId)
+        return res.status(200).send({ friends })
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        console.log(error)
+        return res.status(500).send({ message: "problem while getting friend suggestions" })
     }
 }
 export const getAllFriendRequests = async (req, res) => {
     const currentUser = req.userId;
+    // console.log(currentUser)
     try {
-        const allFriends = await friends.find({
-            $or: [
-                { 'friend1': currentUser },
-                { 'friend2': currentUser },
-            ]
-        })
-        const allFriendsDetails = []
-        // allFriends.forEach(user => {
-        //     allFriendsDetails.push({
-        //         _id: user._id,
-        //         fname: user.fname,
-        //         lname: user.lname,
-        //         posts: user.posts,
-        //         time: user.time,
-        //         bio: user.bio,
-        //         profile: user.profile,
-        //     })
-        // })
-        res.status(200).json(allFriends);
+        const thisUser = await users.findById(currentUser)
+        // console.log(thisUser)
+        const receivedFriendRequests = thisUser.receivedFriendRequests
+        return res.status(200).send({ receivedFriendRequests })
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        console.log(error)
+        return res.status(500).send({ message: "problem while getting friend suggestions" })
     }
 }

@@ -6,10 +6,8 @@ const auth = (req, res, next) => {
 
         let decodeData = jwt.verify(token, process.env.JWT_SECRET)
         req.userId = decodeData?.id 
-
         return next()
     } catch (error) {
-        // console.log(error)
         return res.status(400).send({ message: 'Token verification failed'})
     }
 }

@@ -4,10 +4,10 @@ import auth from '../middleware/auth.js'
 const router = express.Router();
 
 // router.get('/:id', getAllFriends)
-router.get('/',auth, getSuggestions2)
+router.get('/', auth, getSuggestions2)
 router.post('/add/:friend', auth, addFriend)
 router.delete('/remove/:friend', auth, removeFriend)
 router.patch('/accept/:friend', auth, acceptFriend)
-router.get('/requests', getAllFriendRequests)
+router.get('/requests',auth, getAllFriendRequests)
 
 export default router

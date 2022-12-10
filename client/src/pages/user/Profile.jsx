@@ -26,11 +26,14 @@ const Profile = () => {
     } catch (e) {
       navigate("/login")
     }
-  }, [updateProfileForm,editDetailsForm,])
+  }, [updateProfileForm, editDetailsForm,])
   const handleLogout = () => {
     localStorage.clear()
     dispatch({ type: 'LOGOUT' })
     navigate('/login')
+  }
+  if (['login', 'signup', 'logout'].filter(path => window.location.pathname.includes(path)).length > 0) {
+    return <></>
   }
   return <>
     {
