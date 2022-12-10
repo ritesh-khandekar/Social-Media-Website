@@ -52,7 +52,7 @@ export const getAllPosts = async (req, res) => {
     const { id: currentUser } = req.params;
     try {
         const allPosts = await posts.aggregate([
-            { $match: { '_id': ObjectId(currentUser) } },
+            { $match: { '_id': currentUser } },
             {
                 $lookup: {
                     from: 'fb_users',

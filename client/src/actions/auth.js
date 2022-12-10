@@ -9,6 +9,7 @@ export const signup = (authData, navigate, setisLoading) => async (dispatch) => 
         dispatch(setCurrentUser( JSON.parse(localStorage.getItem('Profile')) ))
         navigate('/')
     } catch (error) {
+        setisLoading(false)
         console.log(error)
     }
 }

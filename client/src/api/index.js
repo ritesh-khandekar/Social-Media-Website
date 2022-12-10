@@ -17,6 +17,7 @@ export const updateProfile = (profileData, id) => API.patch(`/user/profile/updat
 
 export const getFriendSuggestions = () => API.get('/friends/')
 export const getAllFriends = (friendId) => API.get(`/friends/${friendId}`)
+export const getFriendRequests = () => API.get(`/friends/requests`)
 export const addFriend = (friendId) => API.post(`/friends/add/${friendId}`)
 export const deleteFriend = (friendId) => API.delete(`/friends/remove/${friendId}`)
 

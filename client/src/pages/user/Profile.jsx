@@ -43,7 +43,7 @@ const Profile = () => {
       editDetailsForm ? <EditProfileDetails setVisibleComponent={seteditDetailsForm} /> : <></>
     }
     <div className="profile-container">
-      <img src={!profileData ? profileImg : (typeof profileData["profile"] !== "undefined" ? profileData["profile"] : profileImg)} alt="" className="profile-img" />
+      <img src={!profileData ? profileImg : (typeof profileData["profile"] !== "undefined" ? (profileData["profile"] ? profileData.profile : profileImg) : profileImg)} alt="" className="profile-img" />
       <h2 className='username'>{profileData.fname} {profileData.lname}</h2>
       <p className='profile-bio'>{profileData.bio}</p>
       <button onClick={(e) => setUpdateProfileForm(true)} type='button' className='update-profile-bio-btn'><FontAwesomeIcon icon={faEdit} /> Edit profile</button>
