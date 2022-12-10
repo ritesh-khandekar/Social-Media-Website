@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { addFriend, deleteFriend, getFriendRequests } from '../../actions/friend.js'
 import UserFriend from './UserFriend'
 import Loader from '../../components/Loader'
+import './friends.css'
 
 const FriendRequests = () => {
     const dispatch = useDispatch()
@@ -13,6 +14,7 @@ const FriendRequests = () => {
     useEffect(() => {
         dispatch(getFriendRequests(setfriendRequests, setIsLoading))
     }, [])
+    
     const deleteOldFriend = (friendId, setFriendExist = () => { }) => {
         setIsLoading(true)
         dispatch(deleteFriend(friendId, setIsLoading, setFriendExist))
@@ -27,7 +29,7 @@ const FriendRequests = () => {
 
     return <>
         {isLoading ? <Loader /> : <></>}
-        <div className="suggestions-container">
+        <div className="friends-container">
             {
                 friendRequests ? (
                     friendRequests.length > 0 ?
@@ -35,7 +37,7 @@ const FriendRequests = () => {
                         <div className="no-friends">No friend suggestions</div>
                 ) :
                     <div className="no-friends">
-                        Failed to fetch friend suggestions
+                        Failed to fetch friend Requests
                     </div>
             }
         </div>

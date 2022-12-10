@@ -1,9 +1,10 @@
 .profile-container{
-    max-width: 400px;
+    max-width: 300px;
     text-align: center;
     padding: 20px 0;
     margin: 10px;
     border-radius: 7px;
+    display: block;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .profile-img{
@@ -56,4 +57,10 @@ hr{
     border: 1px solid red;
     cursor: pointer;
     outline: none;
+}
+@media (max-width: 500px){
+    .profile-container{
+        max-width: 100% !important;
+        /* display: none; */
+    }
 }

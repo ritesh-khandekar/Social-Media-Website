@@ -14,7 +14,7 @@ export const updateProfile = (profileData, navigate, setisLoading, setComponentV
         console.log(error)
     }
 }
-export const getProfile = (setProfile, setisLoading) => async (dispatch) => {
+export const getProfile = (setProfile, setisLoading, navigate) => async (dispatch) => {
     try {
         const id = JSON.parse(localStorage.getItem("Profile")).result._id
         const { data } = await api.getProfile(id)
@@ -23,6 +23,7 @@ export const getProfile = (setProfile, setisLoading) => async (dispatch) => {
         setProfile(data.result)
         // dispatch(setCurrentUser(JSON.parse(localStorage.getItem('Profile'))))
     } catch (error) {
+        navigate("/login")
         console.log(error)
     }
 }

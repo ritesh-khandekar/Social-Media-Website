@@ -22,7 +22,7 @@ const Profile = () => {
   useEffect(() => {
     try {
       setisLoading(true)
-      dispatch(getProfile(setProfileData, setisLoading))
+      dispatch(getProfile(setProfileData, setisLoading, navigate))
     } catch (e) {
       navigate("/login")
     }

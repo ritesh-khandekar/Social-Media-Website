@@ -1,4 +1,4 @@
-export const rediirect = (url, navigate) => async (dispatch) => {
+export const redirect = (url, navigate) => async (dispatch) => {
     try {
         navigate(url)
     } catch (error) {

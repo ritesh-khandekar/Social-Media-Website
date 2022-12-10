@@ -1,11 +1,12 @@
 import * as api from '../api'
 
-export const getFriendSuggestions = (setFriendSuggestions, setisLoading) => async (dispatch) => {
+export const getFriendSuggestions = (setFriendSuggestions, setisLoading, navigate) => async (dispatch) => {
     try {
         const { data } = await api.getFriendSuggestions()
         setisLoading(false)
         setFriendSuggestions(data.friends)
     } catch (error) {
+        navigate("/login")
         console.log(error)
     }
 }

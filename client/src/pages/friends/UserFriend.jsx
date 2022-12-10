@@ -9,7 +9,7 @@ const UserFriend = ({ friendData, removeFriend, deleteFriend, addFriend }) => {
   return <>
     <div className="friend-container">
       <div className="friend-profile-pic">
-        <img src={friendData.profile ? friendData.profile : defaultProfile} alt="Friend" width={"80px"} className='friend-profile-img' />
+        <img src={friendData.profile ? friendData.profile : defaultProfile} alt="Friend" className='friend-profile-img' />
       </div>
       <div className="friend-info">
         <h3>{friendData.fname} {friendData.lname}</h3>

@@ -1,8 +1,8 @@
 .friends-container {
     max-width: 400px;
-    margin: 0 auto;
+    margin: 10px auto;
     border-radius: 7px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .no-friends {
@@ -21,6 +21,10 @@
 .friend-profile-pic {
     display: block;
     margin: 15px;
+}
+
+.friend-profile-img {
+    max-width: 80px;
 }
 
 .friend-info {
@@ -61,7 +65,8 @@
     border: 1px solid red !important;
     color: red;
 }
-.friends-btn{
+
+.friends-btn {
     background: white;
     color: #00e600;
     font-weight: bolder;

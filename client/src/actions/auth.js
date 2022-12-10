@@ -20,7 +20,7 @@ export const login = (authData, navigate, setisLoading, setloginError) => async 
         dispatch({ type: 'AUTH', data})
         setisLoading(false)
         dispatch(setCurrentUser( JSON.parse(localStorage.getItem('Profile')) ))
-        navigate('/profile')
+        navigate('/')
     } catch (error) {
         console.log(error)
         setloginError(<div className='error'>Incorrect email ID or password</div>)

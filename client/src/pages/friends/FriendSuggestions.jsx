@@ -3,18 +3,20 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteFriend, getFriendSuggestions } from '../../actions/friend'
 import { addFriend } from '../../actions/friend'
+import { useNavigate } from 'react-router-dom'
 import Loader from '../../components/Loader'
 import UserFriend from './UserFriend'
 import './friends.css'
 
 const FriendSuggestions = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const [friendSuggestions, setFriendSuggestions] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-        dispatch(getFriendSuggestions(setFriendSuggestions, setIsLoading))
+        dispatch(getFriendSuggestions(setFriendSuggestions, setIsLoading, navigate))
     }, [])
 
     const addNewFriend = (friendId) => {
