@@ -19,6 +19,8 @@ import Profile from './pages/user/Profile'
 import ProfileBioForm from './pages/user/ProfileBioForm'
 import './site.css'
 import SentRequests from './pages/friends/SentRequests'
+import Post from './pages/posts/Post'
+import PostList from './pages/posts/PostList'
 
 const AllRoutes = () => {
     const dispatch = useDispatch()
@@ -59,6 +61,8 @@ const AllRoutes = () => {
                     <Route path='/friendrequests' element={<FriendRequests />} />
                     <Route path='/allfriends' element={<AllFriends />} />
                     <Route path='/sentrequests' element={<SentRequests />} />
+
+                    <Route path='/test' element={<PostList />} />
                 </Routes>
                 {
                     window.innerWidth > 500 ?

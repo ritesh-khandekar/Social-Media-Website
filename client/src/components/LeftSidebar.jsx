@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faHome, faUserCheck, faUserClock, faUserGroup, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 
@@ -11,12 +11,12 @@ const LeftSidebar = () => {
     }
     return <>
         <div className="sidebar">
-            <Link to={'/'} className='active'><FontAwesomeIcon className='sidebar-icons active' icon={faHome} /> Home</Link>
+            <NavLink to={'/'}><FontAwesomeIcon className='sidebar-icons active' icon={faHome} /> Home</NavLink>
             <p>Friends <FontAwesomeIcon icon={ faAngleDown}/></p>
-            <Link to={'/sentrequests'}><FontAwesomeIcon className='sidebar-icons' icon={faUserCheck} /> Sent requests</Link>
-            <Link to={'/friendrequests'}><FontAwesomeIcon className='sidebar-icons' icon={faUserClock} /> Friend requests</Link>
-            <Link to={'/allfriends'}><FontAwesomeIcon className='sidebar-icons' icon={faUserGroup} /> All friends</Link>
-            <Link to={'/friendsuggestions'}><FontAwesomeIcon className='sidebar-icons' icon={faUserPlus} /> Suggestions</Link>
+            <NavLink to={'/sentrequests'}><FontAwesomeIcon className='sidebar-icons' icon={faUserCheck} /> Sent requests</NavLink>
+            <NavLink to={'/friendrequests'}><FontAwesomeIcon className='sidebar-icons' icon={faUserClock} /> Friend requests</NavLink>
+            <NavLink to={'/allfriends'}><FontAwesomeIcon className='sidebar-icons' icon={faUserGroup} /> All friends</NavLink>
+            <NavLink to={'/friendsuggestions'}><FontAwesomeIcon className='sidebar-icons' icon={faUserPlus} /> Suggestions</NavLink>
         </div>
     </>
 }
