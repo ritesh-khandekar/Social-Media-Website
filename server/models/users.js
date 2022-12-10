@@ -11,8 +11,8 @@ const userSchema = mongoose.Schema({
     posts: { type: Number, default: 0 },
     time: { type: Date, default: Date.now },
     bio: { type: String, default: '' },
-    sentFriendRequests: { type: [String], default: [], select: false },
-    receivedFriendRequests: { type: [String], default: [], select: false },
+    sentFriendRequests: { type: [String], default: []},
+    receivedFriendRequests: { type: [String], default: []},
     friends: { type: [String], default: [] },
     profile: { type: String, default: '' },
 })

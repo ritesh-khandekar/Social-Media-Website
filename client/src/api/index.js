@@ -16,9 +16,12 @@ export const getProfile = (id) => API.get(`/user/profile/${id}`);
 export const updateProfile = (profileData, id) => API.patch(`/user/profile/update/${id}`, profileData);
 
 export const getFriendSuggestions = () => API.get('/friends/')
-export const getAllFriends = (friendId) => API.get(`/friends/${friendId}`)
+export const getAllFriends = (friendId) => API.get(`/friends/friends/${friendId}`)
 export const getFriendRequests = () => API.get(`/friends/requests`)
+export const getSentRequests = () => API.get(`/friends/requests/sent`)
+
 export const addFriend = (friendId) => API.post(`/friends/add/${friendId}`)
+export const acceptFriend = (friendId) => API.patch(`/friends/accept/${friendId}`)
 export const deleteFriend = (friendId) => API.delete(`/friends/remove/${friendId}`)
 
 // export const postQuestion = (questionData) => API.post('/questions/Ask', questionData)

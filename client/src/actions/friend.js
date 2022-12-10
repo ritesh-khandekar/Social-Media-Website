@@ -13,10 +13,35 @@ export const getFriendSuggestions = (setFriendSuggestions, setisLoading, navigat
 export const getFriendRequests = (setFriendRequests, setisLoading) => async (dispatch) => {
     try {
         const { data } = await api.getFriendRequests()
+        console.log(data)
+        setisLoading(false)
+        setFriendRequests(data.receivedRequests)
+    } catch (error) {
+        console.log(error)
+        setisLoading(false)
+    }
+}
+export const getSentRequests = (setSentRequests, setisLoading) => async (dispatch) => {
+    try {
+        const { data } = await api.getSentRequests()
+        console.log(data)
+        setisLoading(false)
+        setSentRequests(data.sentRequests)
+    } catch (error) {
+        console.log(error)
+        setisLoading(false)
+    }
+}
+export const getAllFriends = (setFriendRequests, setisLoading) => async (dispatch) => {
+    try {
+        const id = JSON.parse(localStorage.getItem('Profile')).result._id
+        const { data } = await api.getAllFriends(id)
+        console.log(data)
         setisLoading(false)
         setFriendRequests(data.friends)
     } catch (error) {
         console.log(error)
+        setisLoading(false)
     }
 }
 export const addFriend = (friendId, setisLoading) => async (dispatch) => {
@@ -25,6 +50,16 @@ export const addFriend = (friendId, setisLoading) => async (dispatch) => {
         setisLoading(false)
     } catch (error) {
         console.log(error)
+        setisLoading(false)
+    }
+}
+export const acceptFriend = (friendId, setisLoading) => async (dispatch) => {
+    try {
+        await api.acceptFriend(friendId)
+        setisLoading(false)
+    } catch (error) {
+        console.log(error)
+        setisLoading(false)
     }
 }
 export const deleteFriend = (friendId, setisLoading, setfriendExist) => async (dispatch) => {

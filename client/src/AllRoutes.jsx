@@ -10,6 +10,7 @@ import Navbar from './components/Navbar'
 import Login from './pages/auth/Login'
 import SignUp from './pages/auth/SignUp'
 import FriendRequests from './pages/friends/FriendRequests'
+import AllFriends from './pages/friends/AllFriends'
 import FriendSuggestions from './pages/friends/FriendSuggestions'
 import UserFriend from './pages/friends/UserFriend'
 import Home from './pages/Home'
@@ -17,6 +18,7 @@ import EditProfileDetails from './pages/user/EditProfileDetails'
 import Profile from './pages/user/Profile'
 import ProfileBioForm from './pages/user/ProfileBioForm'
 import './site.css'
+import SentRequests from './pages/friends/SentRequests'
 
 const AllRoutes = () => {
     const dispatch = useDispatch()
@@ -48,11 +50,15 @@ const AllRoutes = () => {
                     <Route path='/login' element={<Login />} />
                     <Route path='/signup' element={<SignUp />} />
                     <Route path='/logout' element={<Logout />} />
+
                     <Route path='/bioupdate' element={<ProfileBioForm />} />
                     <Route path='/profileedit' element={<EditProfileDetails />} />
                     <Route path='/profile' element={<Profile />} />
-                    <Route path='/test' element={<FriendSuggestions />} />
+
+                    <Route path='/friendsuggestions' element={<FriendSuggestions />} />
                     <Route path='/friendrequests' element={<FriendRequests />} />
+                    <Route path='/allfriends' element={<AllFriends />} />
+                    <Route path='/sentrequests' element={<SentRequests />} />
                 </Routes>
                 {
                     window.innerWidth > 500 ?

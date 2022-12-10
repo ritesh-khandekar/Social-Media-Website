@@ -3,9 +3,10 @@ import { useState } from 'react'
 import defaultProfile from '../../assets/profile/user.png'
 import './friends.css'
 
-const UserFriend = ({ friendData, removeFriend, deleteFriend, addFriend }) => {
-  const [friendExist, setFriendExist] = useState(false)
-  const [requestSent, setRequestSent] = useState(false)
+const UserFriend = ({ friendData, removeFriend, deleteFriend, acceptFriendRequest = () => { }, addFriend, sentRequest=false, alreadyFriend = false, acceptFriend = false }) => {
+  const [friendExist, setFriendExist] = useState(alreadyFriend)
+  const [requestSent, setRequestSent] = useState(sentRequest)
+  const [acceptFriendL, setacceptFriendL] = useState(acceptFriend)
   return <>
     <div className="friend-container">
       <div className="friend-profile-pic">
@@ -15,16 +16,21 @@ const UserFriend = ({ friendData, removeFriend, deleteFriend, addFriend }) => {
         <h3>{friendData.fname} {friendData.lname}</h3>
         <div className="btn-group">
           {
-            requestSent ?
-              <button className='remove-btn' onClick={(e) => { deleteFriend(friendData._id); setRequestSent(false) }}>Remove friend request</button>
-              :
-              (friendExist ? <>
-                <button className='friends-btn'>Friends</button>
-                <button className='unfriend-btn' onClick={(e) => deleteFriend(friendData._id)}>Remove friend</button>
-              </> : <>
-                <button className='add-friend-btn' onClick={(e) => { addFriend(friendData._id); setRequestSent(true) }}>+Add friend</button>
-                <button className='remove-btn' onClick={(e) => removeFriend(friendData._id)}>Remove</button>
-              </>)
+            acceptFriendL ? <>
+              <button className='add-friend-btn' onClick={(e) => { acceptFriendRequest(friendData._id); setFriendExist(true);setacceptFriendL(false) }}>Accept friend request</button>
+            </> :
+              (
+                requestSent ?
+                  <button className='remove-btn' onClick={(e) => { deleteFriend(friendData._id); setRequestSent(false) }}>Remove friend request</button>
+                  :
+                  (friendExist ? <>
+                    <button className='friends-btn'>Friends</button>
+                    <button className='unfriend-btn' onClick={(e) =>{ deleteFriend(friendData._id); setFriendExist(false)}}>Remove friend</button>
+                  </> : <>
+                    <button className='add-friend-btn' onClick={(e) => { addFriend(friendData._id); setRequestSent(true) }}>+Add friend</button>
+                    <button className='remove-btn' onClick={(e) => removeFriend(friendData._id)}>Remove</button>
+                  </>)
+              )
           }
 
         </div>

@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { acceptFriend, addFriend, deleteFriend, getFriendRequests } from '../../actions/friend.js'
+import { acceptFriend, addFriend, deleteFriend, getSentRequests } from '../../actions/friend.js'
 import UserFriend from './UserFriend'
 import Loader from '../../components/Loader'
 import './friends.css'
 
-const FriendRequests = () => {
+const SentRequests = () => {
     const dispatch = useDispatch()
-    const [friendRequests, setfriendRequests] = useState([])
+    const [SentRequests, setSentRequests] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-        dispatch(getFriendRequests(setfriendRequests, setIsLoading))
+        dispatch(getSentRequests(setSentRequests, setIsLoading))
     }, [])
     
     const deleteOldFriend = (friendId, setFriendExist = () => { }) => {
@@ -36,10 +36,10 @@ const FriendRequests = () => {
         {isLoading ? <Loader /> : <></>}
         <div className="friends-container">
             {
-                friendRequests ? (
-                    friendRequests.length > 0 ?
-                        friendRequests.map((friend, id) => <UserFriend key={id} acceptFriendRequest={acceptFriendRequest} addFriend={addNewFriend} acceptFriend={true} deleteFriend={deleteOldFriend} removeFriend={removeOldFriend} friendData={friend} />) :
-                        <div className="no-friends">No friend Requests</div>
+                SentRequests ? (
+                    SentRequests.length > 0 ?
+                        SentRequests.map((friend, id) => <UserFriend key={id} sentRequest={true} acceptFriendRequest={acceptFriendRequest} addFriend={addNewFriend} deleteFriend={deleteOldFriend} removeFriend={removeOldFriend} friendData={friend} />) :
+                        <div className="no-friends">No requests sent</div>
                 ) :
                     <div className="no-friends">
                         Failed to fetch friend Requests
@@ -49,4 +49,4 @@ const FriendRequests = () => {
     </>
 }
 
-export default FriendRequests
+export default SentRequests
