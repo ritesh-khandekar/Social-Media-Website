@@ -69,18 +69,6 @@ export const getFeedPosts = async (req, res) => {
                 $in: friends
             }
         })
-        // const allPostsDetails = []
-        // allUsers.forEach(user => {
-        //     allPostsDetails.push({
-        //         _id: user.postInfo._id,
-        //         data: user.postInfo.data,
-        //         likes: user.postInfo.likes,
-        //         type: user.postInfo.type,
-        //         shares: user.postInfo.shares,
-        //         caption: user.postInfo.caption,
-        //         by: user.postInfo.userInfo
-        //     })
-        // })
         feedPosts = feedPosts.map(post => {
             const userPosted = allUsers.filter(user => user._id == post.by)[0]
             post = JSON.parse(JSON.stringify(post))
@@ -92,32 +80,20 @@ export const getFeedPosts = async (req, res) => {
     }
 }
 export const getAllPosts = async (req, res) => {
-    const { id: currentUser } = req.params;
+    let currentUser = req.params.id
     try {
-        const allPosts = await posts.aggregate([
-            { $match: { '_id': currentUser } },
-            {
-                $lookup: {
-                    from: 'fb_users',
-                    localField: 'by',
-                    foreignField: '_id',
-                    as: 'userInfo'
-                }
-            }
-        ]);
-        const allPostsDetails = []
-        allPosts.forEach(post => {
-            allPostsDetails.push({
-                _id: post._id,
-                data: post.data,
-                likes: post.likes,
-                type: post.type,
-                shares: post.shares,
-                caption: post.caption,
-                by: post.userInfo
-            })
+        const thisUser = await users.findById(currentUser)
+        // const friends = thisUser.map(user => user._id)
+        let userPosts = await posts.find({
+            by: currentUser
         })
-        res.status(200).json(allPostsDetails);
+
+        userPosts = userPosts.map(post => {
+            // const userPosted = thisUser.filter(user => user._id == post.by)[0]
+            post = JSON.parse(JSON.stringify(post))
+            return { ...post, 'fname': thisUser.fname, 'lname': thisUser.lname, 'profile': thisUser.profile }
+        })
+        res.status(200).json({ userPosts });
     } catch (error) {
         res.status(404).json({ message: error.message });
     }

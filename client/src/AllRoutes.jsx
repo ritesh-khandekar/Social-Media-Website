@@ -21,6 +21,7 @@ import SentRequests from './pages/friends/SentRequests'
 import CreatePost from './pages/posts/CreatePost'
 import PostList from './pages/posts/PostList'
 import FeedPosts from './pages/posts/FeedPosts'
+import UserPosts from './pages/posts/UserPosts'
 
 const AllRoutes = () => {
     const dispatch = useDispatch()
@@ -63,6 +64,8 @@ const AllRoutes = () => {
                     <Route path='/sentrequests' element={<SentRequests />} />
 
                     <Route path='/test' element={<PostList />} />
+                    <Route path='/posts/:friendId' element={<UserPosts />} />
+                    <Route path='/posts' element={<UserPosts />} />
                     <Route path='/createpost' element={<CreatePost />} />
                 </Routes>
                 {

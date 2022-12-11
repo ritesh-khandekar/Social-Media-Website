@@ -21,6 +21,19 @@ export const getFeedPosts = (setFeedPosts, setisLoading) => async (dispatch) => 
         setisLoading(false)
     }
 }
+export const getUserPosts = (setFeedPosts, setisLoading, friend='') => async (dispatch) => {
+    try {
+        const user = JSON.parse(localStorage.getItem("Profile")).result._id
+        const { data } = await api.getUserPosts(friend=='' ? user: friend)
+
+        setFeedPosts(data.userPosts)
+        // console.log(data)
+        setisLoading(false)
+    } catch (error) {
+        console.log(error)
+        setisLoading(false)
+    }
+}
 export const likePost = (postId, setisLoading, setLiked) => async (dispatch) => {
     try {
         const { data } = await api.likePost(postId)
