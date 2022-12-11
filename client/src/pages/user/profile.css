@@ -60,7 +60,7 @@ hr{
 }
 @media (max-width: 500px){
     .profile-container{
-        max-width: 100% !important;
-        /* display: none; */
+        max-width: 100vw !important;
+        flex-grow: 1;
     }
 }

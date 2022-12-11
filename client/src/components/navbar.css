@@ -21,6 +21,13 @@
     display: none;
 }
 
+.topnav .add-post {
+    font-size: large;
+    display: block;
+    right: 60px;
+    position: absolute;
+}
+
 .dropdown {
     float: right;
     overflow: hidden;
@@ -113,6 +120,7 @@
     .topnav.responsive {
         position: relative;
     }
+
     .topnav.responsive .icon {
         position: absolute;
         left: 0;

@@ -6,16 +6,18 @@ import './avatar.css'
 const Avatar = () => {
     const navigate = useNavigate()
     const [letter, setLetter] = useState('')
-    
+    const [profile, setProfile] = useState('')
+
     useEffect(() => {
         try {
              setLetter(JSON.parse(localStorage.getItem("Profile")).result.fname.toString().charAt(0))
+             setProfile(JSON.parse(localStorage.getItem("Profile")).result.profile)
         } catch (err) {
-            // navigate("/login")
+            navigate("/login")
         }
     },[])
     return <>
-        <div className="avatar">{letter}</div>
+        <div className="avatar">{profile=='' ?letter: <img src={profile} className='nav-profile-img' width={"30px"} alt='Profile'/>}</div>
     </>
 }
 

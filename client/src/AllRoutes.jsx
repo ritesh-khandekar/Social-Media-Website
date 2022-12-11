@@ -12,15 +12,15 @@ import SignUp from './pages/auth/SignUp'
 import FriendRequests from './pages/friends/FriendRequests'
 import AllFriends from './pages/friends/AllFriends'
 import FriendSuggestions from './pages/friends/FriendSuggestions'
-import UserFriend from './pages/friends/UserFriend'
 import Home from './pages/Home'
 import EditProfileDetails from './pages/user/EditProfileDetails'
 import Profile from './pages/user/Profile'
 import ProfileBioForm from './pages/user/ProfileBioForm'
 import './site.css'
 import SentRequests from './pages/friends/SentRequests'
-import Post from './pages/posts/Post'
+import CreatePost from './pages/posts/CreatePost'
 import PostList from './pages/posts/PostList'
+import FeedPosts from './pages/posts/FeedPosts'
 
 const AllRoutes = () => {
     const dispatch = useDispatch()
@@ -48,7 +48,7 @@ const AllRoutes = () => {
                         <LeftSidebar /> : <></>
                 }
                 <Routes>
-                    <Route path='/' element={<Home />} />
+                    <Route path='/' element={<FeedPosts />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/signup' element={<SignUp />} />
                     <Route path='/logout' element={<Logout />} />
@@ -63,6 +63,7 @@ const AllRoutes = () => {
                     <Route path='/sentrequests' element={<SentRequests />} />
 
                     <Route path='/test' element={<PostList />} />
+                    <Route path='/createpost' element={<CreatePost />} />
                 </Routes>
                 {
                     window.innerWidth > 500 ?

@@ -16,9 +16,11 @@ export const addFriend = async (req, res) => {
     const thisUser = await users.findById(user)
     const friendUser = await users.findById(friend)
 
-    console.log(thisUser)
     if (thisUser.sentFriendRequests.includes(friend)) {
         return res.status(404).send('Friend request already sent...');
+    }
+    if (thisUser.receivedFriendRequests.includes(friend)) {
+        return res.status(404).send('Friend request is already sent to you from your friend...');
     }
 
     thisUser.sentFriendRequests.push(friend)
@@ -112,11 +114,15 @@ export const acceptFriend = async (req, res) => {
 }
 export const getSuggestions2 = async (req, res) => {
     try {
+        const thisUser = await users.findById(req.userId)
         let friends = await users.find({
             friends: { $ne: req.userId },
-            receivedFriendRequests: { $ne: req.userId }
+            receivedFriendRequests: { $ne: req.userId },
+            sentFriendRequests: {
+                $nin: thisUser.receivedFriendRequests
+            }
         })
-        friends = friends.filter(friend => friend._id != req.userId)
+        friends = friends.filter(friend => friend._id != req.userId && !friend.sentFriendRequests.includes(req.userId))
         return res.status(200).send({ friends })
     } catch (error) {
         console.log(error)

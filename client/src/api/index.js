@@ -24,6 +24,12 @@ export const addFriend = (friendId) => API.post(`/friends/add/${friendId}`)
 export const acceptFriend = (friendId) => API.patch(`/friends/accept/${friendId}`)
 export const deleteFriend = (friendId) => API.delete(`/friends/remove/${friendId}`)
 
+export const getFeedPosts = () => API.get(`/posts/`)
+export const getUserPosts = (postID) => API.get(`/posts/friend/${postID}`)
+export const newPost = (postData) => API.post('/posts/new', postData)
+export const deletePost = (postID) => API.delete(`/posts/delete/${postID}`)
+export const likePost = (postID) => API.patch(`/posts/like/${postID}`)
+
 // export const postQuestion = (questionData) => API.post('/questions/Ask', questionData)
 // export const getAllQuestions = () => API.get('/questions/get');
 // export const deleteQuestion = (id) => API.delete(`/questions/delete/${id}`) 

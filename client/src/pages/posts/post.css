@@ -1,14 +1,21 @@
 .post-list-container {
     border-radius: 5px;
-    margin: 10px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    /* margin: 10px; */
+    flex-grow: 1;
+    min-height: 100vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .post-container {
     /* border: 1px solid black; */
-    background: rgb(241, 241, 241);
+    background: rgb(255, 255, 255);
     max-width: 500px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     margin: 10px;
+    height: fit-content;
+    /* border: 1px solid #1877f2; */
     border-radius: 8px;
     padding-bottom: 10px;
 }
@@ -17,16 +24,25 @@
     justify-content: start;
     align-items: center;
 }
+.post-user-details div{
+    cursor: pointer !important;
+}
 .post-name-date .post-user-name{
     font-size: large;
     font-weight: bold;
+    color: #1877f2;
 }
 .post-name-date .post-date{
     font-size: small;
+    text-align: left;
+    color: #4a4a4a;
+
 }
 
 .post-profile-img{
     width: 40px;
+    border: 3px solid #1877f2;
+    border-radius: 50%;
     display: block;
     margin: 10px;
 }
@@ -44,20 +60,39 @@
 }
 .post-caption{
     padding: 10px;
+    text-align-last: left;
+    background: rgb(244, 244, 244);
+}
+.post-container hr{
+    margin: 0;
+}
+.blue-active{
+    color: #1877f2 !important;
+}
+.like-count{
+    color: #4a4a4a;
+    left: 80px;
+    position: relative;
+    text-align: left;
 }
 .user-interaction-container{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    padding: 10px 0;
     font-size: medium;
     font-weight: bold;
 }
 .user-interaction-container div{
     display: flex;
     align-items: center;
+    cursor: pointer;
+    color: #323232;
 }
 .post-icons{
     font-size: x-large;
     padding:0 10px;
 }
-
+.posts-failed{
+    padding: 10px;
+}

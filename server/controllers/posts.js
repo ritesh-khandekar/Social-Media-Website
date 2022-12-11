@@ -1,32 +1,40 @@
+import mongoose from 'mongoose';
 import posts from '../models/posts.js'
+import users from '../models/users.js'
 
 export const likePost = async (req, res) => {
     const { postID } = req.params;
+
     if (!mongoose.Types.ObjectId.isValid(postID)) {
         return res.status(404).send('Post unavailable...');
     }
     try {
         const post = await posts.findById(postID)
-        const likeIndex = post.likes.findIndex((likeID) => likeID == req.userId)
+        let newpost = JSON.parse(JSON.stringify(post))
+
+        const likeIndex = newpost.likes.findIndex((likeID) => likeID == req.userId)
         if (likeIndex === -1) {
-            post.likes.push(req.userId)
+            newpost.likes.push(req.userId)
         } else {
-            post.likes = post.likes.filter((likeID) => likeID !== req.userId)
+            newpost.likes = newpost.likes.filter((likeID) => likeID != req.userId)
         }
-        await posts.findByIdAndUpdate(postID, post)
-        res.status(200).json({ result: post })
+        newpost = await posts.findByIdAndUpdate(postID, newpost, { new: true })
+        res.status(200).json({ result: newpost })
 
     } catch (error) {
         res.status(500).json("Something went worng while changing likes for the post...")
     }
 }
 export const newPost = async (req, res) => {
-    const { caption, data } = req.body;
+    const { caption, data, type } = req.body;
     if (!data) {
         return res.status(400).json("No data found")
     }
+    const userPosted = await users.findById(req.userId)
     try {
-        const post = await friends.create({ caption, data, by: req.userId })
+        userPosted.posts += 1
+        const post = await posts.create({ caption, data, type, by: req.userId })
+        await users.findByIdAndUpdate(req.userId, userPosted)
         res.status(200).json({ result: post })
 
     } catch (error) {
@@ -48,18 +56,47 @@ export const deletePost = async (req, res) => {
         res.status(500).json("Something went worng...")
     }
 }
+
+export const getFeedPosts = async (req, res) => {
+    const currentUser = req.userId;
+    try {
+        const allUsers = await users.find({
+            friends: currentUser
+        })
+        const friends = allUsers.map(user => user._id)
+        let feedPosts = await posts.find({
+            by: {
+                $in: friends
+            }
+        })
+        // const allPostsDetails = []
+        // allUsers.forEach(user => {
+        //     allPostsDetails.push({
+        //         _id: user.postInfo._id,
+        //         data: user.postInfo.data,
+        //         likes: user.postInfo.likes,
+        //         type: user.postInfo.type,
+        //         shares: user.postInfo.shares,
+        //         caption: user.postInfo.caption,
+        //         by: user.postInfo.userInfo
+        //     })
+        // })
+        feedPosts = feedPosts.map(post => {
+            const userPosted = allUsers.filter(user => user._id == post.by)[0]
+            post = JSON.parse(JSON.stringify(post))
+            return { ...post, 'fname': userPosted.fname, 'lname': userPosted.lname, 'profile': userPosted.profile }
+        })
+        res.status(200).json({ feedPosts });
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
 export const getAllPosts = async (req, res) => {
     const { id: currentUser } = req.params;
     try {
         const allPosts = await posts.aggregate([
             { $match: { '_id': currentUser } },
             {
-                $lookup: {
-                    from: 'fb_users',
-                    localField: 'by',
-                    foreignField: '_id',
-                    as: 'userInfo'
-                },
                 $lookup: {
                     from: 'fb_users',
                     localField: 'by',

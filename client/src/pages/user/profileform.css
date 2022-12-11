@@ -43,6 +43,11 @@
     border-radius: 50%;
     margin: 20px auto;
 }
+.post-preview-img {
+    width: 50%;
+    display: block;
+    margin: 20px auto;
+}
 
 .cropper-layout {
     margin: 0 auto;

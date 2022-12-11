@@ -11,28 +11,30 @@ const ImageCrop = ({ image, setCropData, setVisibleCropper }) => {
 
     const cropImage = (e) => {
         if (typeof cropper !== "undefined") {
-            setCropData(cropper.getCroppedCanvas().toDataURL())
+            setCropData(cropper.getCroppedCanvas({ width: 500 }).toDataURL())
             setVisibleCropper(false)
         }
     }
 
-    return <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ left: 0, zIndex: 10, width:"100%" }} className="preview-container">
+    return <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ left: 0, zIndex: 10, width: "100%" }} className="preview-container">
         {/* <img className="img-preview" alt='Cropper layout' /> */}
         <Cropper
             initialAspectRatio={1}
             preview=".img-preview"
             src={image}
             viewMode={1}
-            minCropBoxHeight={10}
-            minCropBoxWidth={10}
+            // width="400px"
+            minCropBoxHeight={5}
+            minCropBoxWidth={5}
             background={false}
             responsive={true}
             autoCropArea={1}
-            cropBoxResizable={false}
+            cropBoxResizable={true}
             checkOrientation={false}
             onInitialized={(instance) => {
                 setCropper(instance);
             }}
+            // data={{ width: 300, height: 300 }}
             guides={false}
             className='cropper-layout'
         />
