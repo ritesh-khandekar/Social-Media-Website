@@ -75,10 +75,10 @@ const AllRoutes = () => {
                     <Route path='/posts' element={<UserPosts />} />
                     <Route path='/createpost' element={<CreatePost />} />
                 </Routes>
-                {
-                    window.innerWidth > 500 ?
-                    <Profile />:<></>
-                }
+                {/* {
+                    window.innerWidth > 500 ? */}
+                    <Profile rightsidebar={true} />
+                
             </div>
         </>
     )

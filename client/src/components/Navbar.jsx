@@ -70,8 +70,8 @@ const Navbar = () => {
             <div className="center-links">
             </div>
             <div className="right-links">
-                <Link to={"/friendrequests"} className="nav-link"><FontAwesomeIcon icon={faUserClock} /></Link>
-                <Link to={"/profile"} className="nav-link screen-lg" ><FontAwesomeIcon icon={faGear} /></Link>
+                <Link to={"/friendrequests"} className="nav-link screen-lg"><FontAwesomeIcon icon={faUserClock} /></Link>
+                <Link to={"/profile"} className="nav-link screen-lg noscreen-xlg" ><FontAwesomeIcon icon={faGear} /></Link>
                 <Link to={"/createpost"} className="nav-link"><FontAwesomeIcon icon={faPlus} /></Link>
                 <div className="nav-dropdown">
                     <Link className="nav-link link-user-avatar"><Avatar /></Link>

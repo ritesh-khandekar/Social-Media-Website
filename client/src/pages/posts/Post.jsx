@@ -52,12 +52,12 @@ const Post = ({ profile, data, likes, caption, time, fname, lname, by, _id, vali
                     <div className="post-date">{moment(time).fromNow()} <FontAwesomeIcon icon={faUserFriends} /></div>
                 </div>
                 <div className="post-menu">
-                    <div className="menu-btn">
-                        <div className="dropdown">
+                    <div className="post-dropdown">
+                        <div className="menu-btn">
                             <button className="dropbtn noactive">
                                 <FontAwesomeIcon icon={faEllipsisH} />
                             </button>
-                            <div className="dropdown-content dropdown-post">
+                            <div className="post-dropdown-content">
                                 <a onClick={viewUser}><FontAwesomeIcon icon={faUser} /> View user</a>
                                 {
                                     validUser ?

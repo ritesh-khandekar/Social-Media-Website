@@ -1,54 +1,95 @@
-.profile-container{
+.profile-container {
     max-width: 300px;
     text-align: center;
-    padding: 20px 0;
-    margin: 10px;
-    border-radius: 7px;
-    display: block;
-    box-shadow: rgba(0, 0, 0, 0.20) 0px 1px 7px;
+    padding: 10px 0;
+    /* margin: 10px; */
+    /* border-radius: 7px; */
+    border-left: 1px solid rgb(167, 167, 167);
+    border-right: 1px solid rgb(167, 167, 167);
+    display: none;
+    /* box-shadow: rgba(0, 0, 0, 0.20) 0px 1px 7px; */
 }
-.profile-img{
+
+.profile-container.right-sidebar {
+    display: block;
+}
+
+.profile-img {
     display: block;
     border-radius: 50%;
     margin: 0 auto;
-    width: 40%;
-    margin-bottom: 10px;
+    width: 50%;
+    margin-bottom: 6px;
 }
-.profile-bio{
+
+.profile-container .username {
+    margin: 0;
+    padding: 0;
+}
+
+.profile-bio {
     color: rgb(81, 81, 81);
+    margin: 4px;
 }
-.profile-container .username{
+
+.profile-container .username {
     padding: 0;
     margin: 0;
 }
-.update-profile-bio-btn{
+
+.update-profile-bio-btn {
     padding: 10px 20px;
     background: #1877f2;
     color: white;
-    width: 50%;
+    width: 50% !important;
     border-radius: 5px;
     margin: 10px 0;
     cursor: pointer;
     outline: none;
     border: none;
 }
-.btn-update-details{
+
+.btn-update-details {
     width: 50%;
 }
-hr{
+
+.profile-container hr {
+    margin: 0;
+}
+
+.profile-container h3 {
     margin: 10px;
 }
-.profile-details{
+
+.profile-details {
     text-align: start;
-    padding: 0 40px;
+    padding: 0 20px;
 }
-.profile-detail{
+
+.profile-detail {
     color: rgb(81, 81, 81);
+    margin: 10px 0;
 }
-.profile-detail:nth-child(3){
+
+.profile-detail:nth-child(4) {
     text-transform: capitalize;
 }
-.logout-btn{
+
+.profile-detail:nth-child(4) {
+    text-transform: capitalize;
+}
+
+.profile-container .post-count {
+    color: #1877f2;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.profile-container h4 {
+    color: rgb(81, 81, 81);
+}
+
+.logout-btn {
     padding: 10px 20px;
     background: #ffffff;
     font-weight: bold;
@@ -58,9 +99,22 @@ hr{
     cursor: pointer;
     outline: none;
 }
-@media (max-width: 500px){
-    .profile-container{
+
+@media (max-width: 500px) {
+    .profile-container {
         max-width: 100vw !important;
         flex-grow: 1;
+    }
+}
+
+@media (max-width: 1000px) {
+    .profile-container.right-sidebar {
+        display: none;
+    }
+
+    .profile-container {
+        display: block;
+        margin: 0 auto;
+        max-width: 500px;
     }
 }

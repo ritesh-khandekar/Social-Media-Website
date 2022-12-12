@@ -18,9 +18,9 @@ const LeftSidebar = ({ dropdown=false }) => {
             <NavLink className={"sidebar-link"} to={'/allfriends'}><FontAwesomeIcon className='sidebar-icons' icon={faUserGroup} /> All friends</NavLink>
             <NavLink className={"sidebar-link link-divider"} to={'/friendsuggestions'}><FontAwesomeIcon className='sidebar-icons' icon={faUserPlus} /> Suggestions</NavLink>
             <NavLink className={"sidebar-link link-divider"} to={'/posts'}><FontAwesomeIcon className='sidebar-icons' icon={faImage} /> All Posts</NavLink>
-            <NavLink className={"sidebar-link"} to={'/profile'}><FontAwesomeIcon className='sidebar-icons' icon={faGears} /> Profile Settings</NavLink>
-            <div className="sidebar-grow"></div>
-            {/* <NavLink className={"sidebar-link link-logout"} to={'/profile'}><FontAwesomeIcon className='sidebar-icons' icon={faSignOut} /> Logout</NavLink> */}
+            <NavLink className={"sidebar-link display-sm"} to={'/profile'}><FontAwesomeIcon className='sidebar-icons' icon={faGears} /> Profile Settings</NavLink>
+            {/* <div className="sidebar-grow"></div> */}
+            <NavLink className={"sidebar-link link-logout"} to={'/logout'}><FontAwesomeIcon className='sidebar-icons' icon={faSignOut} /> Logout</NavLink>
 
         </div>
     </>

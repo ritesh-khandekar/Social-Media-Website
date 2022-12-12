@@ -1,9 +1,11 @@
 .friends-container {
     /* max-width: 400px; */
-    margin: 10px auto;
+    /* margin: 10px auto; */
     flex-grow: 1;
     border-radius: 7px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .no-friends {
@@ -15,8 +17,14 @@
 }
 
 .friend-container {
+    max-width: 400px;
+    margin: 5px;
+    border: 1px solid rgb(198, 198, 198);
+    border-radius: 5px;
+    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; */
     border-bottom: 1px solid rgb(178, 178, 178);
     display: flex;
+    justify-content: space-around;
 }
 
 .friend-profile-pic {
@@ -34,7 +42,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-grow: 1;
+    /* flex-grow: 1; */
     flex-direction: column;
 }
 
