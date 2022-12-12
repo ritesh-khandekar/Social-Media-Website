@@ -32,7 +32,7 @@ const UserPosts = () => {
     // if (params.friendId) {
     //     friendId = params.friendId
     // }
-    // console.log(friendId)
+    // 
 
     const [isLoading, setIsLoading] = useState(false)
     const [postList, setPostList] = useState([])

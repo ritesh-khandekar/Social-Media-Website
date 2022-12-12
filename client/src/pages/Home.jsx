@@ -11,7 +11,7 @@ const Home = () => {
   // const dispatch = useDispatch()
   // const navigate = useNavigate()
   // const sidebarOpen = useSelector((state) => state.sidebarReducer)
-  // console.log(sidebarOpen)
+  // 
   // useEffect(() => {
   //   try {
   //     const profile = JSON.parse(localStorage.getItem("Profile")).result._id

@@ -50,7 +50,7 @@ export const removeFriend = async (req, res) => {
     const friendUser = await users.findById(friend)
     if (!thisUser.friends.includes(friend)) {
         
-        console.log(thisUser)
+        
         if(thisUser.sentFriendRequests.includes(friend)){
             await users.findByIdAndUpdate(req.userId,{
                 sentFriendRequests: thisUser.sentFriendRequests.filter(fr => fr !== friend)
@@ -125,7 +125,7 @@ export const getSuggestions2 = async (req, res) => {
         friends = friends.filter(friend => friend._id != req.userId && !friend.sentFriendRequests.includes(req.userId))
         return res.status(200).send({ friends })
     } catch (error) {
-        console.log(error)
+        
         return res.status(500).send({ message: "problem while getting friend suggestions" })
     }
 }
@@ -157,7 +157,7 @@ export const getSuggestions = async (req, res) => {
         // friendSuggestions = friendSuggestions.filter(friend => friend._id !== req.userId)
         return res.status(200).send({ suggestions: friendSuggestions })
     } catch (error) {
-        console.log(error)
+        
         return res.status(500).send({ message: "problem while getting friend suggestions" })
     }
 }
@@ -168,7 +168,7 @@ export const getSentRequests = async (req, res) => {
         })
         return res.status(200).send({ sentRequests })
     } catch (error) {
-        console.log(error)
+        
         return res.status(500).send({ message: "problem while getting sent friend requests" })
     }
 }
@@ -181,25 +181,25 @@ export const getAllFriends = async (req, res) => {
         friends = friends.filter(friend => friend._id != req.userId)
         return res.status(200).send({ friends })
     } catch (error) {
-        console.log(error)
+        
         return res.status(500).send({ message: "problem while getting friend suggestions" })
     }
 }
 export const getAllFriendRequests = async (req, res) => {
     const currentUser = req.userId;
-    // console.log(currentUser)
+    // 
     try {
         const receivedRequests = await users.find({
             sentFriendRequests: currentUser
         })
-        // console.log(thisUser)
+        // 
         // const receivedFriendRequests = thisUser.receivedFriendRequests
         // const receivedRequests = receivedFriendRequests.map(async fr => {
-        //     console.log(await users.findById(fr))
+        //     )
         // })
         return res.status(200).send({ receivedRequests })
     } catch (error) {
-        console.log(error)
+        
         return res.status(500).send({ message: "problem while getting friend suggestions" })
     }
 }

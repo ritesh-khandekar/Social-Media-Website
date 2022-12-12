@@ -11,7 +11,7 @@ export const updateProfile = (profileData, navigate, setisLoading, setComponentV
         setisLoading(false)
         navigate('/profile')
     } catch (error) {
-        console.log(error)
+        
     }
 }
 export const getProfile = (setProfile, setisLoading, navigate, profileID) => async (dispatch) => {
@@ -24,6 +24,6 @@ export const getProfile = (setProfile, setisLoading, navigate, profileID) => asy
     } catch (error) {
         navigate("/login")
         setisLoading(false)
-        console.log(error)
+        
     }
 }

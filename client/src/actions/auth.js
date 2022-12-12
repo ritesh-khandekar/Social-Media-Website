@@ -10,7 +10,7 @@ export const signup = (authData, navigate, setisLoading) => async (dispatch) => 
         navigate('/')
     } catch (error) {
         setisLoading(false)
-        console.log(error)
+        
     }
 }
 
@@ -22,7 +22,7 @@ export const login = (authData, navigate, setisLoading, setloginError) => async 
         dispatch(setCurrentUser( JSON.parse(localStorage.getItem('Profile')) ))
         navigate('/')
     } catch (error) {
-        console.log(error)
+        
         setloginError(<div className='error'>Incorrect email ID or password</div>)
         setisLoading(false)
     }

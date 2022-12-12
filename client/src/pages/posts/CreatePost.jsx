@@ -45,7 +45,7 @@ const ProfileBioForm = ({  }) => {
         }
     }, [])
     const handleClose = () => {
-        // console.log("clo")
+        // 
         dispatch(redirect("/", navigate))
     }
     const handleSubmit = (e) => {

@@ -7,7 +7,7 @@ export const newPost = (postData, navigate, setisLoading) => async (dispatch) =>
         setisLoading(false)
         navigate("/")
     } catch (error) {
-        console.log(error)
+        
         setisLoading(false)
     }
 }
@@ -17,7 +17,7 @@ export const getFeedPosts = (setFeedPosts, setisLoading) => async (dispatch) => 
         setFeedPosts(data.feedPosts)
         setisLoading(false)
     } catch (error) {
-        console.log(error)
+        
         setisLoading(false)
     }
 }
@@ -29,7 +29,7 @@ export const getUserPosts = (setFeedPosts, setisLoading, friend='') => async (di
         setFeedPosts(data.userPosts)
         setisLoading(false)
     } catch (error) {
-        console.log(error)
+        
         setisLoading(false)
     }
 }
@@ -40,7 +40,7 @@ export const likePost = (postId, setisLoading, setLiked) => async (dispatch) => 
         setLiked(data.result.likes.includes(id?.result?._id))
         setisLoading(false)
     } catch (error) {
-        console.log(error)
+        
         setisLoading(false)
     }
 }
@@ -49,7 +49,7 @@ export const deletePost = (postId, setisLoading) => async (dispatch) => {
         await api.deletePost(postId)
         setisLoading(false)
     } catch (error) {
-        console.log(error)
+        
         alert("Failed to delete the post")
         setisLoading(false)
     }

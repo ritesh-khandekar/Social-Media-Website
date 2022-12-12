@@ -27,7 +27,7 @@ const AllRoutes = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const sidebarOpen = useSelector((state) => state.sidebarReducer)
-    // console.log(sidebarOpen)
+    // 
     const login = localStorage.getItem("Profile")
     useEffect(() => {
         try {

@@ -31,7 +31,7 @@ const FriendSuggestions = () => {
     const removeOldFriend = (friendId) => {
         setFriendSuggestions(friendSuggestions => friendSuggestions.filter(friend => friend._id !== friendId))
     }
-    // console.log(friendSuggestions)
+    // 
     return <>
         {isLoading ? <Loader /> : <></>}
         <div className="friends-container">
