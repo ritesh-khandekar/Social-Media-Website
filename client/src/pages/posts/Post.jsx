@@ -14,13 +14,13 @@ const Post = ({ profile, data, likes, caption, time, fname, lname, by, _id, vali
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const id = JSON.parse(localStorage.getItem("Profile"))
-    if(!id){
+    if (!id) {
         id.result = {}
         id.result._id = ''
     }
     const [likeCount, setLikeCount] = useState(likes.length - likes.includes(id?.result?._id))
     const [isLiked, setIsLiked] = useState(likes.includes(id?.result?._id))
-    
+
     const handleClose = (e) => {
 
     }
@@ -59,7 +59,11 @@ const Post = ({ profile, data, likes, caption, time, fname, lname, by, _id, vali
                             </button>
                             <div className="dropdown-content dropdown-post">
                                 <a onClick={viewUser}><FontAwesomeIcon icon={faUser} /> View user</a>
-                                <a onClick={handleDelete} className='logout-link'><FontAwesomeIcon icon={faRemove} /> Delete post</a>
+                                {
+                                    validUser ?
+                                        <a onClick={handleDelete} className='logout-link'><FontAwesomeIcon icon={faRemove} /> Delete post</a>
+                                        : <></>
+                                }
                             </div>
                         </div>
                     </div>

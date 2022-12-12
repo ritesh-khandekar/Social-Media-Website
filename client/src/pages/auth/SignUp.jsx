@@ -78,7 +78,7 @@ const SignUp = () => {
               </div>
             </form>
           </div>
-          <div className="forget-password" style={{ textAlign: "center" }}>
+          <div className="forget-password" style={{ textAlign: "center", paddingBottom: "20px" }}>
             Already have account? <Link to={"/login"} className='login-btn-link'>Login</Link>
           </div>
         </div>

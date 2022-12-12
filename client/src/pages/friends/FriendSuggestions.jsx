@@ -16,6 +16,7 @@ const FriendSuggestions = () => {
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
+        setIsLoading(true)
         dispatch(getFriendSuggestions(setFriendSuggestions, setIsLoading, navigate))
     }, [])
 

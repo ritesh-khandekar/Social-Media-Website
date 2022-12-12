@@ -45,10 +45,11 @@ const AllRoutes = () => {
         <>
             <Navbar />
             <div className="flex-container">
-                {
+                {/* {
                     sidebarOpen ?
                         <LeftSidebar /> : <></>
-                }
+                } */}
+                <LeftSidebar />
                 <Routes>
                 {
                     login ?

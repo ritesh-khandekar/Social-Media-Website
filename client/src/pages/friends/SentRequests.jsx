@@ -12,6 +12,7 @@ const SentRequests = () => {
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
+        setIsLoading(true)
         dispatch(getSentRequests(setSentRequests, setIsLoading))
     }, [])
     

@@ -13,6 +13,7 @@ const AllFriends = () => { //Id should be passed
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
+        setIsLoading(true)
         dispatch(getAllFriends(setAllFriends, setIsLoading))
     }, [])
     const deleteOldFriend = (friendId, setFriendExist = () => { }) => {
