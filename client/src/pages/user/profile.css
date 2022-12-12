@@ -13,7 +13,10 @@
 .profile-container.right-sidebar {
     display: block;
 }
-
+.profile-container.force-display, .profile-container.right-sidebar.profile-container.force-display{
+    display: block !important;
+    max-width: 500px !important;
+}
 .profile-img {
     display: block;
     border-radius: 50%;

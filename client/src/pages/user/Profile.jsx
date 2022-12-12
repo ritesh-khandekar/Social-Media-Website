@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendar, faEdit, faEnvelope, faImage, faPhone, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faCalendar, faEdit, faEnvelope, faPhone, faUser } from '@fortawesome/free-solid-svg-icons'
 import profileImg from '../../assets/profile/user.png'
 import ProfileBioForm from './ProfileBioForm'
 import EditProfileDetails from './EditProfileDetails'
@@ -12,7 +12,7 @@ import { getProfile } from '../../actions/user'
 import Loader from '../../components/Loader'
 import './profile.css'
 
-const Profile = ({ rightsidebar=false }) => {
+const Profile = ({ force=false, rightsidebar = false }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   let { id: friendID } = useParams()
@@ -23,10 +23,9 @@ const Profile = ({ rightsidebar=false }) => {
   const [validUser, setValidUser] = useState(true)
   let id;
   try {
-    
     id = JSON.parse(localStorage.getItem("Profile")).result._id
   } catch (error) {
-    id=''
+    id = ''
   }
   useEffect(() => {
     if (friendID) {
@@ -37,7 +36,13 @@ const Profile = ({ rightsidebar=false }) => {
   useEffect(() => {
     try {
       setisLoading(true)
-      dispatch(getProfile(setProfileData, setisLoading, navigate, id))
+      if (rightsidebar) {
+        id = JSON.parse(localStorage.getItem("Profile")).result._id
+        console.log(id)
+        dispatch(getProfile(setProfileData, setisLoading, navigate, id))
+      } else {
+        dispatch(getProfile(setProfileData, setisLoading, navigate, id))
+      }
     } catch (e) {
       navigate("/login")
     }
@@ -68,7 +73,7 @@ const Profile = ({ rightsidebar=false }) => {
     {
       editDetailsForm ? <EditProfileDetails setVisibleComponent={seteditDetailsForm} /> : <></>
     }
-    <div className={"profile-container"+(rightsidebar ? " right-sidebar":"")}>
+    <div className={"profile-container"+(force ? " force-display" : "") + (rightsidebar ? " right-sidebar" : "")}>
       <img src={!profileData ? profileImg : (typeof profileData["profile"] !== "undefined" ? (profileData["profile"] ? profileData.profile : profileImg) : profileImg)} alt="" className="profile-img" />
       <h2 className='username'>{profileData.fname} {profileData.lname}</h2>
       <p className='profile-bio'>{profileData.bio}</p>
@@ -91,7 +96,7 @@ const Profile = ({ rightsidebar=false }) => {
         : <></>
       }
       <hr />
-      <h4 style={{ margin: "10px" }} className={profileData.posts ? "post-count":""} onClick={handleProfileClick}>Posts ({profileData.posts})</h4>
+      <h4 style={{ margin: "10px" }} className={profileData.posts ? "post-count" : ""} onClick={handleProfileClick}>Posts ({profileData.posts})</h4>
       {/* <button onClick={handleProfileClick} className="update-profile-bio-btn" style={{ maxWidth: '50%' }}><FontAwesomeIcon icon={faImage} /> View posts ({profileData.posts})</button> */}
       <hr />
       <h4>Born on {new Date(profileData.birthdate).toDateString()}</h4>

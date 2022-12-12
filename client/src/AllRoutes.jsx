@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLayoutEffect } from 'react'
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { redirect } from './actions/redirect'
 import LeftSidebar from './components/LeftSidebar'
@@ -12,7 +12,6 @@ import SignUp from './pages/auth/SignUp'
 import FriendRequests from './pages/friends/FriendRequests'
 import AllFriends from './pages/friends/AllFriends'
 import FriendSuggestions from './pages/friends/FriendSuggestions'
-import Home from './pages/Home'
 import EditProfileDetails from './pages/user/EditProfileDetails'
 import Profile from './pages/user/Profile'
 import ProfileBioForm from './pages/user/ProfileBioForm'
@@ -26,7 +25,7 @@ import UserPosts from './pages/posts/UserPosts'
 const AllRoutes = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const sidebarOpen = useSelector((state) => state.sidebarReducer)
+    // const sidebarOpen = useSelector((state) => state.sidebarReducer)
     // 
     const login = localStorage.getItem("Profile")
     useEffect(() => {
@@ -63,7 +62,7 @@ const AllRoutes = () => {
                     <Route path='/bioupdate' element={<ProfileBioForm />} />
                     <Route path='/profileedit' element={<EditProfileDetails />} />
                     <Route path='/profile' key={window.location.href} element={<Profile />} />
-                    <Route path='/profile/:id' key={window.location.href} element={<Profile />} />
+                    <Route path='/profile/:id' key={window.location.href} element={<Profile force={true} />} />
 
                     <Route path='/friendsuggestions' element={<FriendSuggestions />} />
                     <Route path='/friendrequests' element={<FriendRequests />} />

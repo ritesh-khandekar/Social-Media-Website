@@ -57,7 +57,10 @@ export const login = async (req, res) => {
     }
 }
 export const getProfile = async (req, res) => {
-    const { id } = req.params;
+    let { id } = req.params;
+    if (!id || id == '' || id == "undefined") {
+        id = req.userId
+    }
     try {
         const existinguser = await users.findById(id);
         if (!existinguser) {

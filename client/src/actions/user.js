@@ -11,7 +11,7 @@ export const updateProfile = (profileData, navigate, setisLoading, setComponentV
         setisLoading(false)
         navigate('/profile')
     } catch (error) {
-        
+        setisLoading(false)
     }
 }
 export const getProfile = (setProfile, setisLoading, navigate, profileID) => async (dispatch) => {

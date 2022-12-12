@@ -1,16 +1,16 @@
-import { faBars, faClose, faDeleteLeft, faEdit, faEllipsisH, faHandDots, faListDots, faRemove, faShare, faThumbsUp, faUser, faUserFriends } from '@fortawesome/free-solid-svg-icons'
+import { faEllipsisH, faRemove, faShare, faThumbsUp, faUser, faUserFriends } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import moment from 'moment'
 import defaultProfile from '../../assets/profile/user.png'
 import './post.css'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { deletePost, likePost } from '../../actions/post'
 import { useState } from 'react'
-import { BrandName, BrandURL } from '../../components/Brand'
+import { BrandURL } from '../../components/Brand'
 
-const Post = ({ profile, data, likes, caption, time, fname, lname, by, _id, validUser = false, setPostList, userLiked = false, setisLoading }) => {
+const Post = ({ profile, data, type, likes, caption, time, fname, lname, by, _id, validUser = false, setPostList, userLiked = false, setisLoading }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const id = JSON.parse(localStorage.getItem("Profile"))
@@ -58,7 +58,7 @@ const Post = ({ profile, data, likes, caption, time, fname, lname, by, _id, vali
                             <a onClick={viewUser}><FontAwesomeIcon icon={faUser} /> View user</a>
                             {
                                 validUser ?
-                                    <a onClick={handleDelete} className='logout-link'><FontAwesomeIcon icon={faRemove} /> Delete post</a>
+                                    <a onClick={handleDelete} className='delete-post-link'><FontAwesomeIcon icon={faRemove} /> Delete post</a>
                                     : <></>
                             }
 
@@ -69,11 +69,18 @@ const Post = ({ profile, data, likes, caption, time, fname, lname, by, _id, vali
                 </div>
             </div>
             <div className="post-content">
-                <img src={data} alt="Post" width={"100%"} />
+                {
+                    type.indexOf("video") == 0 ?
+                        <video src={data} autoPlay controls width={"100%"}></video> :
+                        <img src={data} alt="Post" width={"100%"} />
+                }
             </div>
-            <div className="post-caption">
-                {caption}
-            </div>
+            {
+                caption ?
+                    <div className="post-caption">
+                        {caption}
+                    </div> : <></>
+            }
             <div className="like-count">
                 {likeCount + isLiked} Like(s)
             </div>

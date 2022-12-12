@@ -5,13 +5,13 @@ import { useState } from 'react';
 import { motion } from "framer-motion"
 import './imagecrop.css'
 
-const ImageCrop = ({ image, setCropData, setVisibleCropper }) => {
+const ImageCrop = ({ image, ispost = false, setCropData, setVisibleCropper }) => {
 
     const [cropper, setCropper] = useState();
 
     const cropImage = (e) => {
         if (typeof cropper !== "undefined") {
-            setCropData(cropper.getCroppedCanvas({ width: 500 }).toDataURL())
+            setCropData(cropper.getCroppedCanvas(ispost ? { width: 1000 } : {width: 500}).toDataURL())
             setVisibleCropper(false)
         }
     }

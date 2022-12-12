@@ -72,6 +72,8 @@ export const getFeedPosts = async (req, res) => {
             by: {
                 $in: friends
             }
+        }).sort({
+            time: -1
         })
         feedPosts = feedPosts.map(post => {
             const userPosted = allUsers.filter(user => user._id == post.by)[0]
@@ -90,6 +92,8 @@ export const getAllPosts = async (req, res) => {
         // const friends = thisUser.map(user => user._id)
         let userPosts = await posts.find({
             by: currentUser
+        }).sort({
+            time: -1
         })
 
         userPosts = userPosts.map(post => {

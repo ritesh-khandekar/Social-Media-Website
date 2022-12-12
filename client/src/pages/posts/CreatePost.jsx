@@ -7,13 +7,13 @@ import Loader from '../../components/Loader'
 import addpost from '../../assets/posts/addpost.png'
 import '../user/profileform.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleRight, faClose, faDiagramNext, faInfoCircle, faUpload } from '@fortawesome/free-solid-svg-icons'
+import { faAngleRight, faClose, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { useEffect } from 'react'
 import { BrandName } from '../../components/Brand'
 import { newPost } from '../../actions/post'
 import { redirect } from '../../actions/redirect'
 
-const ProfileBioForm = ({  }) => {
+const ProfileBioForm = ({ }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -24,17 +24,36 @@ const ProfileBioForm = ({  }) => {
     const [data, setdata] = useState(null) //Display cropped pic
     const [imgData, setimgData] = useState('') //Set Image data for cropper
 
-    const onChangePic = (e) => {
+    const [videoData, setvideoData] = useState() //Set Video data for cropper
+    const [videoUpload, setvideoUpload] = useState(false) //Set Video data for cropper
+
+    const onChangeFile = (e) => {
         e.preventDefault()
-        let lastDotIndex = e.target.value.lastIndexOf('.')
-        settype(e.target.value.substring(lastDotIndex))
-        if (e.target.files[0]) {
+        if (!e.target.files[0]) return;
+
+        const ext = e.target.files[0];
+
+        if (ext.type.indexOf("video") == 0) {
+            settype("video")
             const reader = new FileReader();
             reader.addEventListener("load", () => {
-                setimgData(reader.result);
+                setvideoData(reader.result);
+                setdata(reader.result)
             });
             reader.readAsDataURL(e.target.files[0]);
-            setVisibleCropper(true)
+            setvideoUpload(true)
+            // setVisibleCropper(true)
+        } else {
+            let lastDotIndex = e.target.value.lastIndexOf('.')
+            settype(e.target.value.substring(lastDotIndex))
+            if (e.target.files[0]) {
+                const reader = new FileReader();
+                reader.addEventListener("load", () => {
+                    setimgData(reader.result);
+                });
+                reader.readAsDataURL(e.target.files[0]);
+                setVisibleCropper(true)
+            }
         }
     }
     useEffect(() => {
@@ -66,13 +85,17 @@ const ProfileBioForm = ({  }) => {
                 }
                 {
                     VisibleCropper ?
-                        <ImageCrop image={imgData} setCropData={setdata} setVisibleCropper={setVisibleCropper} /> : <></>
+                        <ImageCrop ispost={true} image={imgData} setCropData={setdata} setVisibleCropper={setVisibleCropper} /> : <></>
                 }
                 <form action="" onSubmit={handleSubmit}>
                     <div className="profile-img-selector">
-                        <img src={!data ? addpost : data} alt="Uploaded profile" className='post-preview-img' />
+                        {
+                            videoUpload ?
+                                <video src={videoData} controls autoPlay className='preview-video' width={"90%"}></video> :
+                                <img src={!data ? addpost : data} alt="Uploaded profile" className='post-preview-img' />
+                        }
                         <div className="text-muted">Please choose an image or video to post <FontAwesomeIcon icon={faInfoCircle} title="Please select image less than 2mb for better performance for now" /></div>
-                        <input accept='image/*' type="file" name="" id="" onChange={onChangePic} />
+                        <input accept='image/*,video/*' type="file" name="" id="" onChange={onChangeFile} />
                     </div>
                     <div className="bio-update">
                         <div className="text-muted">Caption </div>
