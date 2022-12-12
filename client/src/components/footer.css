@@ -1,0 +1,14 @@
+.footer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(110, 110, 110);
+}
+.footer .footer-center{
+    padding-bottom: 80px;
+}
+.footer .footer-link{
+    color: rgb(69, 69, 69);
+    padding: 10px;
+}
