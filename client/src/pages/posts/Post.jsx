@@ -1,21 +1,26 @@
-import { faBars, faClose, faEllipsisH, faHandDots, faListDots, faShare, faThumbsUp, faUserFriends } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faClose, faDeleteLeft, faEdit, faEllipsisH, faHandDots, faListDots, faRemove, faShare, faThumbsUp, faUser, faUserFriends } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import moment from 'moment'
 import defaultProfile from '../../assets/profile/user.png'
 import './post.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { likePost } from '../../actions/post'
+import { deletePost, likePost } from '../../actions/post'
 import { useState } from 'react'
+import { BrandName, BrandURL } from '../../components/Brand'
 
-const Post = ({ profile, data, likes, caption, time, fname, lname, by, _id, setPostList, userLiked = false, setisLoading }) => {
+const Post = ({ profile, data, likes, caption, time, fname, lname, by, _id, validUser = false, setPostList, userLiked = false, setisLoading }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const id = JSON.parse(localStorage.getItem("Profile"))
+    if(!id){
+        id.result = {}
+        id.result._id = ''
+    }
     const [likeCount, setLikeCount] = useState(likes.length - likes.includes(id?.result?._id))
     const [isLiked, setIsLiked] = useState(likes.includes(id?.result?._id))
-
+    
     const handleClose = (e) => {
 
     }
@@ -24,7 +29,14 @@ const Post = ({ profile, data, likes, caption, time, fname, lname, by, _id, setP
         dispatch(likePost(_id, setisLoading, setIsLiked))
     }
     const handleShare = (e) => {
-
+        const link = (BrandURL + "posts/" + by)
+        navigator.clipboard.writeText(link)
+        alert("Link copied to clipboard: " + link)
+    }
+    const handleDelete = (e) => {
+        setisLoading(true)
+        dispatch(deletePost(_id, setisLoading))
+        navigate("/")
     }
     const viewUser = (e) => {
         navigate("/profile/" + by)
@@ -40,8 +52,18 @@ const Post = ({ profile, data, likes, caption, time, fname, lname, by, _id, setP
                     <div className="post-date">{moment(time).fromNow()} <FontAwesomeIcon icon={faUserFriends} /></div>
                 </div>
                 <div className="post-menu">
-                    <div className="close-btn" onClick={handleClose}><FontAwesomeIcon icon={faEllipsisH} /></div>
-                    <div className="menu-btn"><FontAwesomeIcon icon={faClose} /></div>
+                    <div className="menu-btn">
+                        <div className="dropdown">
+                            <button className="dropbtn noactive">
+                                <FontAwesomeIcon icon={faEllipsisH} />
+                            </button>
+                            <div className="dropdown-content dropdown-post">
+                                <a onClick={viewUser}><FontAwesomeIcon icon={faUser} /> View user</a>
+                                <a onClick={handleDelete} className='logout-link'><FontAwesomeIcon icon={faRemove} /> Delete post</a>
+                            </div>
+                        </div>
+                    </div>
+                    {/* <div className="close-btn" onClick={handleClose}><FontAwesomeIcon icon={faClose} /></div> */}
                 </div>
             </div>
             <div className="post-content">

@@ -43,14 +43,18 @@ export const newPost = async (req, res) => {
 }
 export const deletePost = async (req, res) => {
     const { postID } = req.params;
+    const user = req.userId;
     if (!postID) {
-        return res.status(400).json("No Data Found")
+        return res.status(400).json("No Data found")
     }
     if (!mongoose.Types.ObjectId.isValid(postID)) {
         return res.status(404).send('Post unavailable...');
     }
     try {
-        await posts.findByIdAndDelete(postID)
+        await posts.deleteOne({
+            by: user,
+            _id: postID
+        })
         res.status(200).json({ deleted: true })
     } catch (error) {
         res.status(500).json("Something went worng...")

@@ -11,19 +11,34 @@ import './post.css'
 const UserPosts = () => {
     const dispatch = useDispatch()
     let params = useParams()
-    // const user = JSON.parse(localStorage.getItem("Profile"))
-    let friendId = '';
-    // let friendId = user?.result?._id
-    if (params.friendId) {
-        friendId = params.friendId
+
+    const [validUser, setvalidUser] = useState(true)
+    let userID = '';
+    try {
+        userID = JSON.parse(localStorage.getItem("Profile")).result._id
+    } catch (e) {
+        userID = ''
     }
-    // console.log(params)
+    let { friendId } = useParams()
+    useEffect(() => {
+        if (friendId) {
+            setvalidUser(friendId == userID)
+            userID = friendId
+        }
+    }, [])
+    // const user = JSON.parse(localStorage.getItem("Profile"))
+    // friendId = '';
+    // let friendId = user?.result?._id
+    // if (params.friendId) {
+    //     friendId = params.friendId
+    // }
+    // console.log(friendId)
 
     const [isLoading, setIsLoading] = useState(false)
     const [postList, setPostList] = useState([])
     useEffect(() => {
         setIsLoading(true)
-        dispatch(getUserPosts(setPostList, setIsLoading, friendId))
+        dispatch(getUserPosts(setPostList, setIsLoading, userID))
     }, [])
 
     return <>
@@ -32,7 +47,7 @@ const UserPosts = () => {
             {
                 postList ? (
                     postList.length > 0 ?
-                        postList.map((post, i) => <Post key={i} {...post} postList={postList} setisLoading={setIsLoading} setPostList={setPostList} />) :
+                        postList.map((post, i) => <Post key={i} {...post} validUser={validUser} postList={postList} setisLoading={setIsLoading} setPostList={setPostList} />) :
                         <div className="posts-failed">No posts by friends</div>
                 ) :
                     <div className="posts-failed">Failed to fetch posts</div>

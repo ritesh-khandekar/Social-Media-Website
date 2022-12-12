@@ -28,6 +28,7 @@ const AllRoutes = () => {
     const navigate = useNavigate()
     const sidebarOpen = useSelector((state) => state.sidebarReducer)
     // console.log(sidebarOpen)
+    const login = localStorage.getItem("Profile")
     useEffect(() => {
         try {
             const profile = JSON.parse(localStorage.getItem("Profile")).result._id
@@ -49,14 +50,19 @@ const AllRoutes = () => {
                         <LeftSidebar /> : <></>
                 }
                 <Routes>
-                    <Route path='/' element={<FeedPosts />} />
+                {
+                    login ?
+                    <Route path='/' element={<FeedPosts />} />:
+                    <Route path='/' element={<Login />} />
+                }
                     <Route path='/login' element={<Login />} />
                     <Route path='/signup' element={<SignUp />} />
                     <Route path='/logout' element={<Logout />} />
 
                     <Route path='/bioupdate' element={<ProfileBioForm />} />
                     <Route path='/profileedit' element={<EditProfileDetails />} />
-                    <Route path='/profile' element={<Profile />} />
+                    <Route path='/profile' key={window.location.href} element={<Profile />} />
+                    <Route path='/profile/:id' key={window.location.href} element={<Profile />} />
 
                     <Route path='/friendsuggestions' element={<FriendSuggestions />} />
                     <Route path='/friendrequests' element={<FriendRequests />} />

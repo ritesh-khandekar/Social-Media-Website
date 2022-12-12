@@ -96,3 +96,33 @@
 .posts-failed{
     padding: 10px;
 }
+
+.post-menu .dropdown{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.dropdown-post{
+    font-size: medium !important;
+    padding: 0px !important;
+    right: auto;
+    top: auto;
+}
+.dropbtn:hover{
+    background: white !important;
+    color: black !important;
+}
+@media (max-width:500px){
+    .post-menu div{
+        padding: 6px 10px;
+        font-size: large;
+    }
+    .post-container .dropdown .dropbtn{
+        /* padding: 6px 10px; */
+    }
+    .post-container .dropdown-content{
+        right: 0;
+    }
+    .post-container .menu-btn{
+        padding: 0 !important;
+    }
+}

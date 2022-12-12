@@ -27,7 +27,6 @@ export const getUserPosts = (setFeedPosts, setisLoading, friend='') => async (di
         const { data } = await api.getUserPosts(friend=='' ? user: friend)
 
         setFeedPosts(data.userPosts)
-        // console.log(data)
         setisLoading(false)
     } catch (error) {
         console.log(error)
@@ -42,6 +41,16 @@ export const likePost = (postId, setisLoading, setLiked) => async (dispatch) => 
         setisLoading(false)
     } catch (error) {
         console.log(error)
+        setisLoading(false)
+    }
+}
+export const deletePost = (postId, setisLoading) => async (dispatch) => {
+    try {
+        await api.deletePost(postId)
+        setisLoading(false)
+    } catch (error) {
+        console.log(error)
+        alert("Failed to delete the post")
         setisLoading(false)
     }
 }

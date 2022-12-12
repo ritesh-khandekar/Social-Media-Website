@@ -20,6 +20,7 @@ const Navbar = () => {
         dispatch({ type: 'LOGOUT' });
         navigate('/')
         dispatch(setCurrentUser(null))
+        window.location.href = '/'
     }
     useEffect(() => {
         const token = User?.token
@@ -50,7 +51,7 @@ const Navbar = () => {
                                 <Link to={"/profile"}><FontAwesomeIcon icon={faEdit} /> Change details</Link>
                             </>
                     }
-                    <Link to={"/logout"} className='logout-link'> <FontAwesomeIcon icon={faSignOut} /> Logout </Link>
+                    <a className='logout-link' onClick={handleLogout}> <FontAwesomeIcon icon={faSignOut} /> Logout </a>
                 </div>
             </div>
         </div>
