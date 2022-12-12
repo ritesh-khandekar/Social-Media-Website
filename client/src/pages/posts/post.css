@@ -11,7 +11,7 @@
 .post-container {
     /* border: 1px solid black; */
     background: rgb(255, 255, 255);
-    max-width: 500px;
+    /* max-width: 500px; */
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     margin: 10px;
     height: fit-content;
@@ -19,63 +19,73 @@
     border-radius: 8px;
     padding-bottom: 10px;
 }
-.post-user-details{
+
+.post-user-details {
     display: flex;
     justify-content: start;
     align-items: center;
 }
-.post-user-details div{
+
+.post-user-details div {
     cursor: pointer !important;
 }
-.post-name-date .post-user-name{
+
+.post-name-date .post-user-name {
     font-size: large;
     font-weight: bold;
     color: #1877f2;
 }
-.post-name-date .post-date{
+
+.post-name-date .post-date {
     font-size: small;
     text-align: left;
     color: #4a4a4a;
-
 }
 
-.post-profile-img{
+.post-profile-img {
     width: 40px;
-    border: 3px solid #1877f2;
+    /* border: 3px solid #1877f2; */
     border-radius: 50%;
     display: block;
     margin: 10px;
 }
 
-.post-menu{
+.post-menu {
     margin-left: auto;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.post-menu div{
+
+.post-menu div:not(.post-dropdown-content) {
     padding: 12px 20px;
     font-size: larger;
 }
-.post-caption{
+
+.post-caption {
     padding: 10px;
     text-align-last: left;
     background: rgb(244, 244, 244);
 }
-.post-container hr{
+
+.post-container hr {
     margin: 0;
 }
-.blue-active{
+
+.blue-active {
     color: #1877f2 !important;
 }
-.like-count{
+
+.like-count {
     color: #4a4a4a;
-    left: 80px;
     position: relative;
+    display: inline-block;
+    right: 80px;
     text-align: left;
 }
-.user-interaction-container{
+
+.user-interaction-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -83,71 +93,84 @@
     font-size: medium;
     font-weight: bold;
 }
-.user-interaction-container div{
+
+.user-interaction-container div {
     display: flex;
     align-items: center;
     cursor: pointer;
     color: #323232;
 }
-.post-icons{
+
+.post-icons {
     font-size: x-large;
-    padding:0 10px;
+    padding: 0 10px;
 }
-.posts-failed{
+
+.posts-failed {
     padding: 10px;
 }
-.menu-btn{
-}
 
-.post-dropdown{
-    position: relative;
-}
+.menu-btn {}
 
-.post-menu .dropbtn{
-    background: white;
+.post-dropbtn {
+    background-color: white;
+    color: black;
+    padding: 16px;
+    font-size: 16px;
     border: none;
-    font-size: large;
     cursor: pointer;
 }
 
-.post-dropdown-content{
-    font-size: medium !important;
-    padding: 0px !important;
-    position: absolute;
-    /* top: 10px; */
+.post-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.post-dropdown-content {
     display: none;
-    border: 1px solid black;
-    max-width: 200px;
-    z-index: 9;
-    text-align: left;
-}
-.post-dropdown-content a{
-    padding: 10px 20px;
-    float: none;
-    text-align: left;
-    background: white;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    background-color: #ffffff;
+    right: 0;
     border-radius: 5px;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
 }
-.dropbtn:hover{
-    background: white !important;
-    color: black !important;
-}
-.post-dropdown:hover .post-dropdown-content{
+
+.post-dropdown-content a {
+    color: black;
+    padding: 10px 16px;
+    border-radius: 5px;
+    text-decoration: none;
     display: block;
 }
-@media (max-width:500px){
-    .post-menu div{
+
+.post-dropdown-content a:hover {
+    background-color: #eee9e9;
+}
+
+.post-dropdown:hover .post-dropdown-content {
+    display: block;
+}
+
+.post-dropdown:hover .post-dropbtn {
+    background-color: rgb(237, 236, 236);
+}
+
+@media (max-width:500px) {
+    /* .post-menu div {
         padding: 6px 10px;
         font-size: large;
-    }
-    .post-container .dropdown .dropbtn{
+    } */
+
+    .post-container .dropdown .post-dropbtn {
         /* padding: 6px 10px; */
     }
+
     /* .post-container .dropdown-content{
         right: 0;
     } */
-    .post-container .menu-btn{
+    .post-container .menu-btn {
         padding: 0 !important;
     }
 }

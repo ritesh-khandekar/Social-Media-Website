@@ -17,13 +17,12 @@ const ImageCrop = ({ image, setCropData, setVisibleCropper }) => {
     }
 
     return <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ left: 0, zIndex: 10, width: "100%" }} className="preview-container">
-        {/* <img className="img-preview" alt='Cropper layout' /> */}
         <Cropper
             initialAspectRatio={1}
             preview=".img-preview"
             src={image}
             viewMode={1}
-            // width="400px"
+            style={{ width: "300px" }}
             minCropBoxHeight={5}
             minCropBoxWidth={5}
             background={false}
@@ -34,9 +33,8 @@ const ImageCrop = ({ image, setCropData, setVisibleCropper }) => {
             onInitialized={(instance) => {
                 setCropper(instance);
             }}
-            // data={{ width: 300, height: 300 }}
             guides={false}
-            className='cropper-layout'
+            className="cropper-layout"
         />
         <button className="crop-img-btn" onClick={cropImage}>Crop Image and Upload</button>
     </motion.div>

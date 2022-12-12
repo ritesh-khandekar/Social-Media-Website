@@ -23,6 +23,7 @@ export const getProfile = (setProfile, setisLoading, navigate, profileID) => asy
         // dispatch(setCurrentUser(JSON.parse(localStorage.getItem('Profile'))))
     } catch (error) {
         navigate("/login")
+        setisLoading(false)
         console.log(error)
     }
 }

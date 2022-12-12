@@ -7,9 +7,9 @@ const Logout = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     dispatch({ type: 'LOGOUT' })
-    // dispatch(redirect('/login', navigate))
+    navigate("/login")
     return (
-        <div className='center'>Logged out sucessfully. <Link to={'/login'}  className='forget-password'>Go to login page</Link></div>
+        <div className='logout-message'>Logged out sucessfully. <Link to={'/login'}  className='forget-password'>Go to login page</Link></div>
     )
 }
 

@@ -137,6 +137,11 @@ hr {
     text-align: center;
     padding-top: 10px;
 }
+.logout-message{
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+}
 .error{
     color: red;
     font-weight: bold;

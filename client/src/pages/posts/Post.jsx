@@ -52,22 +52,20 @@ const Post = ({ profile, data, likes, caption, time, fname, lname, by, _id, vali
                     <div className="post-date">{moment(time).fromNow()} <FontAwesomeIcon icon={faUserFriends} /></div>
                 </div>
                 <div className="post-menu">
-                    <div className="post-dropdown">
-                        <div className="menu-btn">
-                            <button className="dropbtn noactive">
-                                <FontAwesomeIcon icon={faEllipsisH} />
-                            </button>
-                            <div className="post-dropdown-content">
-                                <a onClick={viewUser}><FontAwesomeIcon icon={faUser} /> View user</a>
-                                {
-                                    validUser ?
-                                        <a onClick={handleDelete} className='logout-link'><FontAwesomeIcon icon={faRemove} /> Delete post</a>
-                                        : <></>
-                                }
-                            </div>
+                    <div className="post-dropdown" style={{ float: "right" }}>
+                        <button className="post-dropbtn"><FontAwesomeIcon icon={faEllipsisH} /></button>
+                        <div className="post-dropdown-content">
+                            <a onClick={viewUser}><FontAwesomeIcon icon={faUser} /> View user</a>
+                            {
+                                validUser ?
+                                    <a onClick={handleDelete} className='logout-link'><FontAwesomeIcon icon={faRemove} /> Delete post</a>
+                                    : <></>
+                            }
+
                         </div>
                     </div>
-                    {/* <div className="close-btn" onClick={handleClose}><FontAwesomeIcon icon={faClose} /></div> */}
+
+                    {/* <FontAwesomeIcon icon={faEllipsisH} /> */}
                 </div>
             </div>
             <div className="post-content">
